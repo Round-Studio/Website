@@ -1,47 +1,84 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { useTheme } from './composables/useTheme'
+import { useLoading } from './composables/useLoading'
+import Navbar from './components/Navbar.vue'
+import Footer from './components/Footer.vue'
+import TopLoadingBar from './components/TopLoadingBar.vue'
+import ErrorBoundary from './components/ErrorBoundary.vue'
+
+// Initialize theme
+const { initTheme } = useTheme()
+initTheme()
+
+// Get loading state
+const { shouldShowLoading } = useLoading()
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div id="app">
+    <!-- 顶部加载条 -->
+    <TopLoadingBar :is-loading="shouldShowLoading()" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <!-- 主要内容 -->
+    <div class="app-content">
+      <ErrorBoundary>
+        <Navbar />
+        <main>
+          <RouterView />
+        </main>
+        <Footer />
+      </ErrorBoundary>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<style>
+#app {
+  min-height: 100vh;
+  position: relative;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.app-content {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+main {
+  flex: 1;
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+/* 页面切换动画 */
+.router-view {
+  transition: all 0.3s ease;
+}
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.v-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.v-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+</style>
+
+<style>
+@import './assets/styles/theme.css';
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
 }
 </style>
