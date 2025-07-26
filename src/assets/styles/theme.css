@@ -157,8 +157,8 @@ body {
 }
 
 .btn-outline:hover {
-  border-color: var(--primary-blue);
-  color: var(--primary-blue);
+  border-color: var(--bg-primary);
+  color: var(--bg-primary);
   transform: translateY(-1px);
 }
 
