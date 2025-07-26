@@ -11,23 +11,6 @@
       <div class="nav-links desktop-nav">
         <router-link to="/" class="nav-link">首页</router-link>
         <router-link to="/rmcl" class="nav-link">RMCL</router-link>
-<!--        <div class="products-dropdown" @mouseenter="isProductsDropdownOpen = true" @mouseleave="isProductsDropdownOpen = false">
-          <button class="nav-link dropdown-trigger" @click="toggleProductsDropdown">
-            产品
-            <svg class="dropdown-icon" :class="{ 'rotated': isProductsDropdownOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
-          </button>
-          <transition name="dropdown">
-            <div v-if="isProductsDropdownOpen" class="dropdown-menu">
-              <router-link to="/web-development" class="dropdown-item" @click="closeProductsDropdown">网站开发</router-link>
-              <router-link to="/mobile-app" class="dropdown-item" @click="closeProductsDropdown">移动应用</router-link>
-              <router-link to="/brand-design" class="dropdown-item" @click="closeProductsDropdown">品牌设计</router-link>
-              <a href="#" class="dropdown-item">数据分析平台</a>
-              <a href="#" class="dropdown-item">在线教育平台</a>
-            </div>
-          </transition>
-        </div>-->
         <router-link to="/about" class="nav-link">关于我们</router-link>
       </div>
 
@@ -169,10 +152,6 @@ const closeProductsDropdown = () => {
   display: flex;
   align-items: center;
   gap: 16px;
-}
-
-.products-dropdown {
-  position: relative;
 }
 
 .dropdown-trigger {
