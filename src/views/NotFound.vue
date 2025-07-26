@@ -31,10 +31,8 @@
         
         <!-- 联系信息 -->
         <div class="contact-help">
-          <p>如果问题持续存在，请联系我们：</p>
-          <a href="mailto:hello@roundstudio.com" class="contact-link">
-            hello@roundstudio.com
-          </a>
+          <p>如果问题持续存在，请联系我们</p>
+          <a href="https://qm.qq.com/q/yh1Lztq6as">开发交流 & 审核群</a>
         </div>
       </div>
     </div>
@@ -71,6 +69,10 @@ const goBack = () => {
   padding: 80px 20px 20px;
   position: relative;
   overflow: hidden;
+}
+
+.btn-outline{
+  color: var(--text-primary);
 }
 
 .not-found-container {

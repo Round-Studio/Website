@@ -7,14 +7,14 @@
         <span class="logo-text gradient-text">Round Studio</span>
       </router-link>
 
-      <!-- Desktop Navigation -->
+      <!-- Desktop Navigation - 移动到左边 -->
       <div class="nav-links desktop-nav">
         <router-link to="/" class="nav-link">首页</router-link>
         <router-link to="/rmcl" class="nav-link">RMCL</router-link>
         <router-link to="/about" class="nav-link">关于我们</router-link>
       </div>
 
-      <!-- Right side -->
+      <!-- Right side - 只保留主题切换和移动菜单按钮 -->
       <div class="nav-right">
         <ThemeToggle />
         <button @click="toggleMobileMenu" class="mobile-menu-btn">
@@ -48,7 +48,6 @@ import { ref } from 'vue'
 import ThemeToggle from './ThemeToggle.vue'
 
 const isMobileMenuOpen = ref(false)
-const isProductsDropdownOpen = ref(false)
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
@@ -56,14 +55,6 @@ const toggleMobileMenu = () => {
 
 const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
-}
-
-const toggleProductsDropdown = () => {
-  isProductsDropdownOpen.value = !isProductsDropdownOpen.value
-}
-
-const closeProductsDropdown = () => {
-  isProductsDropdownOpen.value = false
 }
 </script>
 
@@ -93,6 +84,7 @@ const closeProductsDropdown = () => {
   justify-content: space-between;
 }
 
+/* 调整布局结构 */
 .logo {
   display: flex;
   align-items: center;
@@ -100,6 +92,20 @@ const closeProductsDropdown = () => {
   text-decoration: none;
   background: transparent;
   transition: transform 0.3s ease;
+  order: 1; /* Logo 在第一位 */
+}
+
+.nav-links {
+  order: 2; /* 导航链接在第二位 */
+  margin-right: auto; /* 将导航链接推到左边 */
+  margin-left: 40px; /* 与Logo保持间距 */
+}
+
+.nav-right {
+  order: 3; /* 右侧内容在第三位 */
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .logo:hover {
@@ -109,11 +115,6 @@ const closeProductsDropdown = () => {
 .logo-icon {
   width: 40px;
   height: 40px;
-}
-
-.logo-svg {
-  width: 100%;
-  height: 100%;
 }
 
 .logo-text {
@@ -133,6 +134,7 @@ const closeProductsDropdown = () => {
   text-decoration: none;
   padding: 8px 16px;
   border-radius: 8px;
+  margin-right: -20px;
   transition: all 0.3s ease;
   position: relative;
   height: 42px;
@@ -146,70 +148,6 @@ const closeProductsDropdown = () => {
 .nav-link.router-link-active {
   color: var(--primary-blue);
   background: var(--bg-secondary);
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.dropdown-trigger {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.dropdown-icon {
-  width: 16px;
-  height: 16px;
-  transition: transform 0.3s ease;
-}
-
-.dropdown-icon.rotated {
-  transform: rotate(180deg);
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  min-width: 200px;
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  box-shadow: var(--shadow-lg);
-  padding: 8px 0;
-  z-index: 1000;
-  margin-top: 8px;
-}
-
-.dropdown-item {
-  display: block;
-  padding: 12px 20px;
-  color: var(--text-primary);
-  text-decoration: none;
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-
-.dropdown-item:hover {
-  background: var(--bg-secondary);
-  color: var(--primary-blue);
-}
-
-.dropdown-enter-active,
-.dropdown-leave-active {
-  transition: all 0.3s ease;
-}
-
-.dropdown-enter-from,
-.dropdown-leave-to {
-  opacity: 0;
-  transform: translateY(-10px);
 }
 
 .mobile-menu-btn {
@@ -260,29 +198,6 @@ const closeProductsDropdown = () => {
   background: var(--bg-secondary);
 }
 
-.mobile-products {
-  margin: 8px 0;
-}
-
-.mobile-products-title {
-  color: var(--text-primary);
-  font-weight: 600;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border-color);
-  margin-bottom: 8px;
-}
-
-.mobile-nav-link.product-link {
-  padding-left: 32px;
-  font-size: 14px;
-  color: var(--text-secondary);
-}
-
-.mobile-nav-link.product-link:hover {
-  color: var(--primary-blue);
-  background: var(--bg-secondary);
-}
-
 .mobile-menu-enter-active,
 .mobile-menu-leave-active {
   transition: all 0.3s ease;
@@ -317,6 +232,11 @@ const closeProductsDropdown = () => {
   .logo-icon {
     width: 32px;
     height: 32px;
+  }
+  
+  /* 移动端调整布局 */
+  .nav-links {
+    margin-left: 20px;
   }
 }
 </style>

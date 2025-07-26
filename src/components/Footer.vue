@@ -9,7 +9,7 @@
             <span class="logo-text gradient-text">Round Studio</span>
           </div>
           <p class="footer-description">
-            专注于创新设计与技术开发的团队，致力于为客户提供完整的数字化解决方案。
+            一群专注于 Minecraft 相关产品开发的学生
           </p>
           <div class="social-links">
             <a href="https://github.com/Round-Studio" class="social-link" title="GitHub">
@@ -34,9 +34,10 @@
 
         <!-- Services -->
         <div class="footer-section">
-          <h3 class="section-title">产品</h3>
+          <h3 class="section-title">软件</h3>
           <ul class="footer-links">
-            <li><router-link to="/rmcl">RMCL 启动器</router-link></li>
+            <li><router-link to="/rmcl">RMCL</router-link></li>
+            <li><router-link to="/olc">OverrideLauncher.Core</router-link></li>
           </ul>
         </div>
 
@@ -48,14 +49,14 @@
               <svg class="contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
               </svg>
-              <span>hello@roundstudio.com</span>
+              <span><a href="https://qm.qq.com/q/yh1Lztq6as">开发交流 & 审核群</a></span>
             </div>
             <div class="contact-item">
               <svg class="contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
               </svg>
-              <span>中国，上海</span>
+              <span>China</span>
             </div>
           </div>
         </div>
@@ -64,11 +65,11 @@
       <!-- Copyright -->
       <div class="footer-bottom">
         <div class="copyright">
-          <p>&copy; 2024 Round Studio. 保留所有权利。</p>
+          <p>2025 | Round Studio. 保留所有权利。</p>
         </div>
         <div class="footer-bottom-links">
-          <a href="#">隐私政策</a>
-          <a href="#">服务条款</a>
+          <!-- <a href="#">隐私政策</a>
+          <a href="#">服务条款</a> -->
         </div>
       </div>
     </div>

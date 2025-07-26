@@ -22,57 +22,64 @@
       <div class="container">
         <div class="section-header">
           <h2 class="section-title gradient-text-secondary">开发组成员</h2>
-          <p class="section-subtitle">程序开发组</p>
+          <p class="section-subtitle">Round Studio 团队成员</p>
         </div>
         <div class="people-grid">
-          <div class="person-card animate-fade-in-left">
-            <h3>RMCL</h3>
-            <p>RMCL 是 Round Studio 新开发的一个 Minecraft 启动器。新一代 RMCL 启动器，更快，更帅</p>
-            <RouterLink to="/rmcl">Website</RouterLink>
-            <a href="https://github.com/Round-Studio/RMCL">Github</a>
-            <a href="https://docs.roundstudio.top">Docs</a>
-            <a href="https://qm.qq.com/q/cjM8UoD3YA">QQ Group</a>
-          </div>
-          <div class="person-card animate-fade-in-up">
-            <h3>OverrideLauncher.Core</h3>
-            <p>全新的一代 Minecraft 启动核心，快速，简单，自由</p>
-            <RouterLink to="/olc">Website</RouterLink>
-            <a href="https://github.com/Round-Studio/OverrideLauncher.Core">Github</a>
-            <a href="https://docs.roundstudio.top">Docs</a>
-          </div>
-          <div class="person-card animate-fade-in-right">
-            <h3>SmartTerminals</h3>
-            <p>一个带有翻译功能的 Shell 程序</p>
-            <a href="https://github.com/Round-Studio/Round.NET.SmartTerminals">Github</a>
-            <a href="https://docs.roundstudio.top">Docs</a>
+          <div v-for="member in members" :key="member.id" class="person-card animate-fade-in-up">
+            <img :src="member.avatar_url" :alt="member.login" class="member-avatar">
+            <h3>{{ member.login }}</h3>
+            <p v-if="member.bio">{{ member.bio }}</p>
+            <p v-else>Round Studio 开发团队成员</p>
+            <div class="member-links">
+              <a :href="member.html_url" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
           </div>
         </div>
       </div>
     </section>
-
-    <MarqueeSection
-        :text-list="['Round Studio', '加入我们']"
-    />
-
-    <!-- join Section -->
-    <section class="join" id="join">
-      <div class="container">
-        <div class="join-content">
-          <h2 class="join-title">加入我们</h2>
-          <p class="join-subtitle">让我们一起创造令人惊艳的数字体验</p>
-          <div class="join-actions">
-            <router-link to="/join" class="link-animated" style="width: 320px;">了解更多</router-link>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
   </div>
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
 import MarqueeSection from '../components/MarqueeSection.vue'
+
+const members = ref([])
+
+// 获取 GitHub 组织成员
+const fetchMembers = async () => {
+  try {
+    const response = await fetch('https://api.github.com/orgs/Round-Studio/members')
+    if (!response.ok) {
+      throw new Error('Failed to fetch members')
+    }
+    const data = await response.json()
+    
+    // 获取每个成员的详细信息（包括 bio 等信息）
+    const membersWithDetails = await Promise.all(
+      data.map(async member => {
+        const userResponse = await fetch(member.url)
+        if (!userResponse.ok) {
+          return member
+        }
+        const userData = await userResponse.json()
+        return {
+          ...member,
+          bio: userData.bio,
+          blog: userData.blog
+        }
+      })
+    )
+    
+    members.value = membersWithDetails
+  } catch (error) {
+    console.error('Error fetching GitHub members:', error)
+  }
+}
+
+onMounted(() => {
+  fetchMembers()
+})
 </script>
 
 <style scoped>
@@ -81,7 +88,7 @@ import MarqueeSection from '../components/MarqueeSection.vue'
 }
 
 .hero {
-  min-height: 60vh;
+  min-height: 40vh;
   display: flex;
   align-items: center;
   color: white;
@@ -105,15 +112,32 @@ import MarqueeSection from '../components/MarqueeSection.vue'
   margin-bottom: 24px;
 }
 
-
-.hero-visual {
-  position: relative;
-  height: 400px;
+.member-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 16px;
+  object-fit: cover;
+  border: 3px solid var(--border-color);
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(180deg); }
+.member-links {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.member-links a {
+  padding: 6px 12px;
+  background-color: var(--bg-secondary);
+  border-radius: 6px;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.member-links a:hover {
+  background-color: var(--bg-tertiary);
 }
 
 .container {
@@ -175,13 +199,13 @@ import MarqueeSection from '../components/MarqueeSection.vue'
   border-color: white;
 }
 
-.people {
+.people, .projects {
   padding: 100px 0;
 }
 
 .people-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 32px;
 }
 
@@ -191,6 +215,10 @@ import MarqueeSection from '../components/MarqueeSection.vue'
   background: var(--bg-primary);
   border: 1px solid var(--border-color);
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .person-card:hover {
@@ -199,10 +227,11 @@ import MarqueeSection from '../components/MarqueeSection.vue'
 }
 
 .person-card h3 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
   word-wrap: break-word;
   color: var(--text-primary);
+  margin-bottom: 12px;
 }
 
 .person-card a {
@@ -210,24 +239,21 @@ import MarqueeSection from '../components/MarqueeSection.vue'
   cursor: pointer;
   padding: 8px;
   border-radius: 6px;
+  text-decoration: none;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
 }
 
-.person-card.card-gradient h3 {
-  color: white;
+.person-card a:hover {
+  background: var(--bg-tertiary);
 }
 
 .person-card p {
   color: var(--text-secondary);
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   line-height: 1.6;
-  height: 48px;
+  flex-grow: 1;
 }
-
-.person-card.card-gradient p {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-
 
 @media (max-width: 1024px) {
   .hero-container {
@@ -250,15 +276,6 @@ import MarqueeSection from '../components/MarqueeSection.vue'
     font-size: 2.5rem;
   }
 
-  .hero-subtitle {
-    font-size: 1.125rem;
-  }
-
-  .hero-actions {
-    flex-direction: column;
-    align-items: center;
-  }
-
   .section-title {
     font-size: 2rem;
   }
@@ -275,6 +292,10 @@ import MarqueeSection from '../components/MarqueeSection.vue'
   .container,
   .hero-container {
     padding: 0 20px;
+  }
+  
+  .people-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
