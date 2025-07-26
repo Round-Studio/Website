@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import NotFound from '../views/NotFound.vue'
 import RMCL from '../views/RMCL.vue'
+import DownloadRMCL from '../views/download/DownloadRMCL.vue'
 
 const routes = [
   {
@@ -22,6 +23,12 @@ const routes = [
     path: '/rmcl',
     name: 'RMCL',
     component: RMCL,
+    meta: { title: 'RMCL - 新一代 Minecraft 启动器' }
+  },
+  {
+    path: '/download/rmcl',
+    name: 'DownloadRMCL',
+    component: DownloadRMCL,
     meta: { title: 'RMCL - 新一代 Minecraft 启动器' }
   },
   {

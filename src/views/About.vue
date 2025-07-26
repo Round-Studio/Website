@@ -29,7 +29,7 @@
             <img :src="member.avatar_url" :alt="member.login" class="member-avatar">
             <h3>{{ member.login }}</h3>
             <p v-if="member.bio">{{ member.bio }}</p>
-            <p v-else>Round Studio 开发团队成员</p>
+            <p v-else>还没有介绍呢...</p>
             <div class="member-links">
               <a :href="member.html_url" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>

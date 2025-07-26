@@ -56,6 +56,28 @@
   color: var(--text-primary);
 }
 
+.border-capsule {
+  /* 基础样式 */
+  background: var(--gradient-secondary);
+  height: 32px;
+  display: inline-flex; /* 使用 flex 布局更好控制内容 */
+  align-items: center;
+  justify-content: center; /* 水平居中 */
+  padding: 4px 16px; /* 左右 padding 增大使胶囊更饱满 */
+  border-radius: 9999px; /* 使用超大值确保完全圆形 */
+  box-sizing: border-box;
+  margin-bottom: 30px;
+  margin-right: 10px;
+  
+  /* 文字样式 */
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap; /* 防止文字换行 */
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: var(--bg-primary);
@@ -362,4 +384,8 @@ body {
     width: 4px;
     height: 4px;
   }
+}
+
+a{
+  cursor: pointer;
 }
