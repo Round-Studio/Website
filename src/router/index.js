@@ -5,6 +5,8 @@ import About from '../views/About.vue'
 import NotFound from '../views/NotFound.vue'
 import RMCL from '../views/RMCL.vue'
 import DownloadRMCL from '../views/download/DownloadRMCL.vue'
+import CarouselTest from '../views/CarouselTest.vue'
+import GlobalAnimationDemo from '../views/GlobalAnimationDemo.vue'
 
 const routes = [
   {
@@ -30,6 +32,18 @@ const routes = [
     name: 'DownloadRMCL',
     component: DownloadRMCL,
     meta: { title: 'RMCL - 新一代 Minecraft 启动器' }
+  },
+  {
+    path: '/yjq/demo/carousel-test',
+    name: 'CarouselTest',
+    component: CarouselTest,
+    meta: { title: 'ProjectCarousel 动画演示' }
+  },
+  {
+    path: '/yjq/demo/global-animation-demo',
+    name: 'GlobalAnimationDemo',
+    component: GlobalAnimationDemo,
+    meta: { title: '全局动画系统演示' }
   },
   {
     path: '/:pathMatch(.*)*',
