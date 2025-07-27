@@ -50,11 +50,6 @@ const routes = [
     name: 'NotFound',
     component: NotFound,
     meta: { title: '页面未找到' }
-  },
-  {
-    path : 'tencent1123294867725941868.txt',
-    name : 'tx',
-    component : '10631208614971004669'
   }
 ]
 
