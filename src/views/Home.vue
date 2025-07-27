@@ -3,18 +3,17 @@
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-container">
-        <div class="hero-content animate-fade-in-up">
-          <h1 class="hero-title">
-            Welcome To
+        <div class="hero-content animate-on-scroll">
+          <h1 class="hero-title text-reveal">Welcome To
             <br>
-            <span class="gradient-text gradient-text-titletext">Round Studio</span>
+            <span class="gradient-text gradient-text-titletext text-glow">Round Studio</span>
           </h1>
-          <p class="hero-subtitle">
+          <p class="hero-subtitle animate-slide-left" style="animation-delay: 0.3s">
             欢迎来到我们的官网！我们是一个由学生组成的团队，专注于 Minecraft 相关项目开发
           </p>
-          <div class="hero-actions">
-            <a class="btn-outline" style="color: var(--text-primary)" href="https://github.com/Round-Studio">前往 Github</a>
-            <a class="btn-outline" style="color: var(--text-primary)" href="#join">加入我们</a>
+          <div class="hero-actions animate-scale-up" style="animation-delay: 0.6s">
+            <a class="btn-outline btn-enhanced" style="color: var(--text-primary)" href="https://github.com/Round-Studio">前往 Github</a>
+            <a class="btn-outline btn-enhanced" style="color: var(--text-primary)" href="#join">加入我们</a>
           </div>
         </div>
       </div>
@@ -27,31 +26,31 @@
     <!-- project Section -->
     <section class="project" id="project">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header animate-on-scroll">
           <h2 class="section-title gradient-text-secondary">我们的项目</h2>
-          <p class="section-subtitle">我们 正在开发 或 已完成 的项目</p>
+          <p class="section-subtitle animate-slide-left text-reveal" style="animation-delay: 0.2s">我们 正在开发 或 已完成 的项目</p>
         </div>
         <div class="project-grid">
-          <div class="service-card animate-fade-in-left">
+          <div class="service-card card-enhanced animate-slide-left" style="animation-delay: 0.1s">
             <h3>RMCL</h3>
             <p>RMCL 是 Round Studio 新开发的一个 Minecraft 启动器。新一代 RMCL 启动器，更快，更帅</p>
-            <RouterLink to="/rmcl">Website</RouterLink>
-            <a href="https://github.com/Round-Studio/RMCL">Github</a>
-            <a href="https://docs.roundstudio.top">Docs</a>
-            <a href="https://qm.qq.com/q/cjM8UoD3YA">QQ Group</a>
+            <RouterLink to="/rmcl" class="link-enhanced">Website</RouterLink>
+            <a href="https://github.com/Round-Studio/RMCL" class="link-enhanced">Github</a>
+            <a href="https://docs.roundstudio.top" class="link-enhanced">Docs</a>
+            <a href="https://qm.qq.com/q/cjM8UoD3YA" class="link-enhanced">QQ Group</a>
           </div>
-          <div class="service-card animate-fade-in-up">
+          <div class="service-card card-enhanced animate-scale-up" style="animation-delay: 0.3s">
             <h3>OverrideLauncher.Core</h3>
             <p>全新的一代 Minecraft 启动核心，快速，简单，自由</p>
-            <RouterLink to="/olc">Website</RouterLink>
-            <a href="https://github.com/Round-Studio/OverrideLauncher.Core">Github</a>
-            <a href="https://docs.roundstudio.top">Docs</a>
+            <RouterLink to="/olc" class="link-enhanced">Website</RouterLink>
+            <a href="https://github.com/Round-Studio/OverrideLauncher.Core" class="link-enhanced">Github</a>
+            <a href="https://docs.roundstudio.top" class="link-enhanced">Docs</a>
           </div>
-          <div class="service-card animate-fade-in-right">
+          <div class="service-card card-enhanced animate-slide-right" style="animation-delay: 0.5s">
             <h3>SmartTerminals</h3>
             <p>一个带有翻译功能的 Shell 程序</p>
-            <a href="https://github.com/Round-Studio/Round.NET.SmartTerminals">Github</a>
-            <a href="https://docs.roundstudio.top">Docs</a>
+            <a href="https://github.com/Round-Studio/Round.NET.SmartTerminals" class="link-enhanced">Github</a>
+            <a href="https://docs.roundstudio.top" class="link-enhanced">Docs</a>
           </div>
         </div>
       </div>
@@ -64,11 +63,11 @@
     <!-- join Section -->
     <section class="join" id="join">
       <div class="container">
-        <div class="join-content">
-          <h2 class="join-title">加入我们</h2>
-          <p class="join-subtitle">让我们一起创造令人惊艳的数字体验</p>
-          <div class="join-actions">
-            <router-link to="/join" class="link-animated" style="width: 320px;">了解更多</router-link>
+        <div class="join-content animate-on-scroll">
+          <h2 class="join-title text-reveal">加入我们</h2>
+          <p class="join-subtitle animate-slide-left" style="animation-delay: 0.2s">让我们一起创造令人惊艳的数字体验</p>
+          <div class="join-actions animate-scale-up" style="animation-delay: 0.4s">
+            <router-link to="/join" class="link-animated btn-enhanced" style="width: 320px;">了解更多</router-link>
           </div>
         </div>
       </div>
