@@ -1,4 +1,4 @@
-﻿﻿<template>
+﻿<template>
   <nav class="navbar">
     <div class="nav-container">
       <!-- Logo -->
@@ -20,10 +20,10 @@
         <button @click="toggleMobileMenu" class="mobile-menu-btn">
           <svg class="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                :d="isMobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              :d="isMobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'"
             />
           </svg>
         </button>
@@ -233,7 +233,7 @@ const closeMobileMenu = () => {
     width: 32px;
     height: 32px;
   }
-
+  
   /* 移动端调整布局 */
   .nav-links {
     margin-left: 20px;
