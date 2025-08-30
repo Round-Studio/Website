@@ -44,46 +44,6 @@ export function useGlobalAnimations() {
     }
   }
 
-  // 初始化鼠标跟随效果
-  const initCursorFollower = () => {
-    // 创建主光标跟随器
-    cursorFollower = document.createElement('div')
-    cursorFollower.className = 'cursor-follower'
-    document.body.appendChild(cursorFollower)
-
-    // 创建光标轨迹
-    for (let i = 0; i < 5; i++) {
-      const trail = document.createElement('div')
-      trail.className = 'cursor-trail'
-      trail.style.animationDelay = `${i * 0.05}s`
-      document.body.appendChild(trail)
-      cursorTrails.value.push(trail)
-    }
-
-    // 鼠标移动事件
-    const handleMouseMove = (e) => {
-      mousePosition.value = { x: e.clientX, y: e.clientY }
-      
-      // 更新主跟随器位置
-      if (cursorFollower) {
-        cursorFollower.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`
-      }
-
-      // 更新轨迹位置（延迟效果）
-      cursorTrails.value.forEach((trail, index) => {
-        setTimeout(() => {
-          trail.style.transform = `translate(${e.clientX - 3}px, ${e.clientY - 3}px)`
-        }, index * 50)
-      })
-    }
-
-    document.addEventListener('mousemove', handleMouseMove)
-    
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove)
-    }
-  }
-
   // 初始化滚动动画观察器
   const initScrollAnimations = () => {
     scrollObserver = new IntersectionObserver(

@@ -1,10 +1,8 @@
 <script setup>
 import { useTheme } from './composables/useTheme'
-import { useLoading } from './composables/useLoading'
 import { useGlobalAnimations } from './composables/useGlobalAnimations'
 import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
-import TopLoadingBar from './components/TopLoadingBar.vue'
 import ErrorBoundary from './components/ErrorBoundary.vue'
 import GlobalAnimations from './components/GlobalAnimations.vue'
 
@@ -12,8 +10,6 @@ import GlobalAnimations from './components/GlobalAnimations.vue'
 const { initTheme } = useTheme()
 initTheme()
 
-// Get loading state
-const { shouldShowLoading } = useLoading()
 
 // Initialize global animations
 const { initAllAnimations } = useGlobalAnimations()
@@ -23,9 +19,6 @@ const { initAllAnimations } = useGlobalAnimations()
   <div id="app">
     <!-- 全局动画系统 -->
     <GlobalAnimations />
-
-    <!-- 顶部加载条 -->
-    <TopLoadingBar :is-loading="shouldShowLoading()" />
 
     <!-- 主要内容 -->
     <div class="app-content">

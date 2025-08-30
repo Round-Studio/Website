@@ -2,7 +2,7 @@
   <nav class="navbar">
     <div class="nav-container">
       <!-- Logo -->
-      <router-link to="/" class="logo">
+      <router-link to="/" class="logo" style="border-radius: 6px;padding: 8px;height: 48px">
         <img src="../assets/logo.ico" class="logo-icon"/>
         <span class="logo-text gradient-text">Round Studio</span>
       </router-link>
@@ -11,6 +11,7 @@
       <div class="nav-links desktop-nav">
         <router-link to="/" class="nav-link">首页</router-link>
         <router-link to="/rmcl" class="nav-link">RMCL</router-link>
+        <router-link to="/bedrockboot" class="nav-link">BedrockBoot</router-link>
         <router-link to="/about" class="nav-link">关于我们</router-link>
       </div>
 

@@ -942,27 +942,6 @@ onUnmounted(() => {
   }
 }
 
-.carousel-container:hover {
-  animation: breathe 4s ease-in-out infinite;
-}
-
-/* 鼠标悬停时的整体效果 */
-.project-carousel:hover .particle {
-  animation-duration: 10s;
-}
-
-.project-carousel:hover .carousel-container {
-  box-shadow:
-    var(--shadow-xl),
-    0 0 50px rgba(59, 130, 246, 0.2);
-}
-
-.dark .project-carousel:hover .carousel-container {
-  box-shadow:
-    0 25px 50px -12px rgba(0, 0, 0, 0.5),
-    0 0 50px rgba(139, 92, 246, 0.3);
-}
-
 /* 加载状态动画 */
 .carousel-container:not(.animate-in) {
   animation: loadingPulse 1.5s ease-in-out infinite;

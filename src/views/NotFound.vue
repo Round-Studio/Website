@@ -36,13 +36,6 @@
         </div>
       </div>
     </div>
-    
-    <!-- 背景装饰 -->
-    <div class="background-decoration">
-      <div class="floating-circle circle-1"></div>
-      <div class="floating-circle circle-2"></div>
-      <div class="floating-circle circle-3"></div>
-    </div>
   </div>
 </template>
 
