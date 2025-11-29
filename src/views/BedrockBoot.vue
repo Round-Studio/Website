@@ -15,10 +15,7 @@
             <label class="gradient-text">Minecraft Bedrock for Windows</label>
             启动器
             <div class="border-capsule">
-              ✨ Fluent Design
-            </div>
-            <div class="border-capsule">
-              😺 WinUI 3
+              ✨ OnePointUI
             </div>
             <div class="border-capsule">
               🎉 多版本 多实例
@@ -45,7 +42,7 @@
       <div class="container">
         <div class="section-header">
           <h2 class="section-title gradient-text-secondary">华丽 UI</h2>
-          <p class="section-subtitle">使用 <label class="gradient-text-secondary">WinUI 3</label> 框架。使得 BedrockBoot 在原生 Windows 平台完美契合</p>
+          <p class="section-subtitle">使用 <label class="gradient-text-secondary">OnePointUI</label> 框架。使得 BedrockBoot 拥有华丽的外表。</p>
         </div>
 
         <div class="section-header">

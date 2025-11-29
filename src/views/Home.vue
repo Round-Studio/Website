@@ -47,10 +47,10 @@
             <a href="https://docs.roundstudio.top" class="link-enhanced">Docs</a>
           </div>
           <div class="service-card card-enhanced animate-slide-right" style="animation-delay: 0.5s">
-            <h3>SmartTerminals</h3>
-            <p>一个带有翻译功能的 Shell 程序</p>
-            <a href="https://github.com/Round-Studio/Round.NET.SmartTerminals" class="link-enhanced">Github</a>
-            <a href="https://docs.roundstudio.top" class="link-enhanced">Docs</a>
+            <h3>BedrockBoot</h3>
+            <p>一个为 Windows 开发的 Minecraft BedrockBoot 启动器</p>
+            <a href="https://github.com/Round-Studio/BedrockBoot" class="link-enhanced">Github</a>
+            <a href="https://qm.qq.com/q/aWepquevOo" class="link-enhanced">QQ Group</a>
           </div>
         </div>
       </div>

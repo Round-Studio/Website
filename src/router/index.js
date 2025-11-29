@@ -5,8 +5,6 @@ import About from '../views/About.vue'
 import NotFound from '../views/NotFound.vue'
 import RMCL from '../views/RMCL.vue'
 import DownloadRMCL from '../views/download/DownloadRMCL.vue'
-import CarouselTest from '../views/CarouselTest.vue'
-import GlobalAnimationDemo from '../views/GlobalAnimationDemo.vue'
 import BedrockBoot from "@/views/BedrockBoot.vue";
 import DownloadBedrockBoot from "@/views/download/DownloadBedrockBoot.vue";
 
@@ -22,42 +20,30 @@ const routes = [
     name: 'About',
     component: About,
     meta: { title: '关于我们' }
-  }, 
-  {
-      path: '/bedrockboot',
-        name: 'BedrockBoot',
-        component: BedrockBoot,
-        meta: { title: 'BedrockBoot | Windows 基岩版启动器 | 多实例，多任务' }
-  },
-    {
-        path: '/rmcl',
-        name: 'RMCL',
-        component: RMCL,
-        meta: { title: 'RMCL - 新一代 Minecraft 启动器' }
-    },
-    {
-        path: '/download/rmcl',
-        name: 'DownloadRMCL',
-        component: DownloadRMCL,
-        meta: { title: 'RMCL - 新一代 Minecraft 启动器' }
-    },
-    {
-        path: '/download/bedrockboot',
-        name: 'DownloadBedrockBoot',
-        component: DownloadBedrockBoot,
-        meta: { title: '下载 | BedrockBoot | Windows 基岩版启动器 | 多实例，多任务' }
-    },
-  {
-    path: '/yjq/demo/carousel-test',
-    name: 'CarouselTest',
-    component: CarouselTest,
-    meta: { title: 'ProjectCarousel 动画演示' }
   },
   {
-    path: '/yjq/demo/global-animation-demo',
-    name: 'GlobalAnimationDemo',
-    component: GlobalAnimationDemo,
-    meta: { title: '全局动画系统演示' }
+    path: '/bedrockboot',
+    name: 'BedrockBoot',
+    component: BedrockBoot,
+    meta: { title: 'BedrockBoot | Windows 基岩版启动器 | 多实例，多任务' }
+  },
+  {
+    path: '/rmcl',
+    name: 'RMCL',
+    component: RMCL,
+    meta: { title: 'RMCL - 新一代 Minecraft 启动器' }
+  },
+  {
+    path: '/download/rmcl',
+    name: 'DownloadRMCL',
+    component: DownloadRMCL,
+    meta: { title: 'RMCL - 新一代 Minecraft 启动器' }
+  },
+  {
+    path: '/download/bedrockboot',
+    name: 'DownloadBedrockBoot',
+    component: DownloadBedrockBoot,
+    meta: { title: '下载 | BedrockBoot | Windows 基岩版启动器 | 多实例，多任务' }
   },
   {
     path: '/:pathMatch(.*)*',

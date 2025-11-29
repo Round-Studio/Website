@@ -11,19 +11,19 @@
               <span class="gradient-text gradient-text-titletext">RMCL</span>
             </h1>
             <p class="hero-subtitle">
-              你的下一代 Minecraft 启动器
+              新一代 Minecraft 启动器
             </p>
             <div v-if="latestRelease" class="version-info">
               <p>最新版本: <strong>{{ latestRelease.tag_name }}</strong></p>
               <p v-if="latestRelease.published_at">发布于: {{ formatDate(latestRelease.published_at) }}</p>
             </div>
             <div class="hero-actions">
-              <a 
-                v-if="latestRelease" 
-                class="btn-gradient" 
-                style="color: var(--text-primary)" 
-                :href="latestRelease.html_url"
-                target="_blank"
+              <a
+                  v-if="latestRelease"
+                  class="btn-gradient"
+                  style="color: var(--text-primary)"
+                  :href="latestRelease.html_url"
+                  target="_blank"
               >
                 查看发布说明
               </a>
@@ -34,27 +34,8 @@
           </div>
 
           <div class="content-right" v-if="latestRelease">
-            <div class="downloads-container">
-              <h3 class="downloads-title">构建文件下载</h3>
-              <div class="downloads-list">
-                <div v-for="asset in latestRelease.assets" :key="asset.id" class="download-item">
-                  <div class="file-info">
-                    <span class="file-name">{{ asset.name }}</span>
-                    <span class="file-size">{{ formatFileSize(asset.size) }}</span>
-                  </div>
-                  <a 
-                    :href="asset.browser_download_url" 
-                    class="download-btn"
-                    target="_blank"
-                  >
-                    下载
-                  </a>
-                </div>
-              </div>
-              <div v-if="latestRelease.assets.length === 0" class="no-assets">
-                此版本暂无构建文件
-              </div>
-            </div>
+            <!-- 使用下载组件 -->
+            <DownloadRelease :release="latestRelease" />
           </div>
         </div>
       </div>
@@ -64,10 +45,22 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import DownloadRelease from '@/components/DownloadRelease.vue' // 根据实际路径调整
 
 const latestRelease = ref(null)
 const loading = ref(true)
 const error = ref(null)
+
+// 在父组件中定义 formatDate 方法
+const formatDate = (dateString) => {
+  if (!dateString) return '未知日期'
+  const date = new Date(dateString)
+  return date.toLocaleDateString('zh-CN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
+}
 
 const fetchLatestRelease = async () => {
   try {
@@ -80,27 +73,10 @@ const fetchLatestRelease = async () => {
     latestRelease.value = await response.json()
   } catch (err) {
     error.value = err.message
-    console.error('获取RMCL最新版本失败:', err)
+    console.error('获取rmcl最新版本失败:', err)
   } finally {
     loading.value = false
   }
-}
-
-const formatDate = (dateString) => {
-  const date = new Date(dateString)
-  return date.toLocaleDateString('zh-CN', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
-}
-
-const formatFileSize = (bytes) => {
-  if (bytes === 0) return '0 Bytes'
-  const k = 1024
-  const sizes = ['Bytes', 'KB', 'MB', 'GB']
-  const i = Math.floor(Math.log(bytes) / Math.log(k))
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
 }
 
 onMounted(() => {
@@ -130,15 +106,15 @@ onMounted(() => {
 .hero-content {
   display: flex;
   gap: 60px;
-  align-items: center; /* 添加这行使子元素垂直居中 */
-  height: 100%; /* 确保父容器有高度 */
+  align-items: center;
+  height: 100%;
 }
 
 .content-left {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* 使内容在容器内垂直居中 */
+  justify-content: center;
 }
 
 .content-right {
@@ -177,82 +153,6 @@ onMounted(() => {
   margin: 5px 0;
 }
 
-.downloads-container {
-  background: var(--bg-secondary);
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: var(--shadow-md);
-}
-
-.downloads-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: var(--text-primary);
-}
-
-.downloads-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.download-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px;
-  background: var(--bg-primary);
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-}
-
-.file-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.file-name {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.file-size {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  margin-top: 4px;
-}
-
-.download-btn {
-  padding: 8px 16px;
-  background: var(--gradient-primary);
-  color: white;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: transform 0.2s ease;
-}
-
-.download-btn:hover {
-  transform: translateY(-2px);
-}
-
-.no-assets {
-  color: var(--text-secondary);
-  text-align: center;
-  padding: 20px;
-}
-
-.border-capsule {
-  display: inline-block;
-  background: var(--gradient-hero);
-  padding: 4px 12px;
-  border-radius: 16px;
-  margin: 4px;
-  font-size: 0.9rem;
-  color: white;
-}
-
 .btn-gradient {
   display: inline-block;
   padding: 12px 24px;
@@ -286,7 +186,7 @@ onMounted(() => {
     flex-direction: column;
     gap: 40px;
   }
-  
+
   .hero-container {
     padding: 0 40px;
   }
