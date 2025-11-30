@@ -34,10 +34,7 @@
           </div>
 
           <div class="content-right" v-if="latestRelease">
-            <DownloadActionFile 
-              owner="Round-Studio" 
-              repo="BedrockBoot" 
-            />
+            <DownloadRelease :release="latestRelease" />
           </div>
         </div>
       </div>
@@ -47,7 +44,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import DownloadActionFile from '@/components/DownloadActionFile.vue'
+import DownloadRelease from '@/components/DownloadRelease.vue' // 根据实际路径调整
 
 const latestRelease = ref(null)
 const loading = ref(true)
