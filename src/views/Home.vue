@@ -10,14 +10,15 @@
           我们强调工程质量、长期维护和开源协作。
         </p>
         <div class="hero-tags">
-          <span class="hero-tag">跨平台</span>
-          <span class="hero-tag">Windows Bedrock</span>
-          <span class="hero-tag">OnePointUI / Avalonia</span>
+          <span class="hero-tag success-badge">跨平台</span>
+          <span class="hero-tag success-badge">Minecraft</span>
+          <span class="hero-tag success-badge">dotNET C#</span>
+          <span class="hero-tag success-badge">OnePointUI / Avalonia / WinUI</span>
         </div>
         <div class="hero-actions">
-          <RouterLink to="/rmcl" class="hero-btn hero-btn-solid">查看 RMCL</RouterLink>
-          <RouterLink to="/bedrockboot" class="hero-btn hero-btn-ghost">查看 BedrockBoot</RouterLink>
-          <a href="https://github.com/Round-Studio" target="_blank" class="hero-btn hero-btn-ghost">GitHub 组织</a>
+          <RouterLink to="/bedrockboot" class="hero-btn hero-btn-solid">查看 BedrockBoot</RouterLink>
+          <RouterLink to="/rmcl" class="hero-btn hero-btn-ghost">查看 RMCL</RouterLink>
+          <a href="https://github.com/Round-Studio" target="_blank" class="hero-btn hero-btn-ghost" rel="noreferrer">GitHub 组织</a>
         </div>
       </div>
     </section>
@@ -36,9 +37,9 @@
           </div>
           <p>{{ project.description }}</p>
           <div class="project-links">
-            <RouterLink :to="project.page" class="project-link">项目页</RouterLink>
-            <RouterLink :to="project.download" class="project-link">下载页</RouterLink>
-            <a :href="project.github" target="_blank" class="project-link">GitHub</a>
+            <a :href="project.page" target="_blank" class="project-link" rel="noreferrer">项目页</a>
+            <a :href="project.download" target="_blank" class="project-link" rel="noreferrer">下载</a>
+            <a :href="project.github" target="_blank" class="project-link" rel="noreferrer">GitHub</a>
           </div>
         </article>
       </div>
@@ -47,11 +48,11 @@
     <section class="links-section">
       <div class="section-head">
         <h2>常用入口</h2>
-        <p>文档、发布、反馈和社区入口统一整理。</p>
+        <p>文档、发布、反馈和社区入口</p>
       </div>
 
       <div class="links-grid">
-        <a v-for="item in quickLinks" :key="item.title" :href="item.href" target="_blank" class="link-card">
+        <a v-for="item in quickLinks" :key="item.title" :href="item.href" target="_blank" class="link-card" rel="noreferrer">
           <h3>{{ item.title }}</h3>
           <p>{{ item.description }}</p>
         </a>
@@ -63,22 +64,31 @@
 <script setup>
 const projects = [
   {
-    name: 'RMCL',
-    stateLabel: '持续更新',
-    stateClass: 'state-active',
-    description: '跨平台 Minecraft 启动器，基于 Avalonia，强调一致体验与长期维护。',
-    page: '/rmcl',
-    download: '/download/rmcl',
-    github: 'https://github.com/Round-Studio/RMCL'
-  },
-  {
     name: 'BedrockBoot',
-    stateLabel: 'v2 主线',
+    stateLabel: '持续更新',
     stateClass: 'state-active',
     description: '面向 Windows 的 Bedrock 启动器，v2.x 使用 OnePointUI，并支持多版本多实例。',
     page: '/bedrockboot',
     download: '/download/bedrockboot',
     github: 'https://github.com/Round-Studio/BedrockBoot'
+  },
+  {
+    name: 'BedrockLauncher.Core',
+    stateLabel: '维护',
+    stateClass: 'state-active',
+    description: 'dotNET 平台的 Windows Bedrock 启动器核心库，提供启动器功能的核心实现，供 BedrockBoot 和其他项目使用。',
+    page: 'https://docs.roundstudio.top/docs/product/blc',
+    download: 'https://www.nuget.org/packages/BedrockLauncher.Core',
+    github: 'https://github.com/Round-Studio/BedrockLauncher.Core'
+  },
+  {
+    name: 'RMCL',
+    stateLabel: '暂停更新',
+    stateClass: 'state-paused',
+    description: '跨平台 Minecraft 启动器，基于 Avalonia，强调一致体验与长期维护。',
+    page: '/rmcl',
+    download: '/download/rmcl',
+    github: 'https://github.com/Round-Studio/RMCL'
   }
 ]
 
@@ -97,11 +107,6 @@ const quickLinks = [
     title: 'RMCL Releases',
     description: '查看 RMCL 的发布节奏与可下载构建。',
     href: 'https://github.com/Round-Studio/RMCL/releases'
-  },
-  {
-    title: 'BedrockBoot Discussions',
-    description: '反馈问题、提出建议并参与社区讨论。',
-    href: 'https://github.com/Round-Studio/BedrockBoot/discussions'
   }
 ]
 </script>
@@ -112,7 +117,7 @@ const quickLinks = [
 }
 
 .hero-section {
-  padding: 84px 40px 56px;
+  padding: 74px 40px 50px;
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -120,30 +125,31 @@ const quickLinks = [
 
 .hero-bg {
   position: absolute;
-  inset: 14px 40px 10px;
-  min-height: 320px;
-  border-radius: 24px;
+  inset: 14px 40px 8px;
+  min-height: 340px;
+  border-radius: 18px;
   background:
-    radial-gradient(40rem 22rem at 15% 12%, rgba(16, 185, 129, 0.14) 0%, rgba(16, 185, 129, 0) 72%),
-    radial-gradient(32rem 18rem at 86% 10%, rgba(66, 133, 244, 0.12) 0%, rgba(66, 133, 244, 0) 74%),
-    linear-gradient(160deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    linear-gradient(to right, color-mix(in srgb, var(--border-color) 45%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--border-color) 45%, transparent) 1px, transparent 1px),
+    var(--gradient-hero);
+  background-size: 26px 26px, 26px 26px, auto;
   border: 1px solid var(--border-color);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 86%, transparent 100%);
 }
 
 .hero-inner {
   max-width: 980px;
   margin: 0 auto;
-  padding: 36px 42px;
+  padding: 34px 36px;
   position: relative;
 }
 
 .hero-kicker {
   margin: 0 0 14px;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  letter-spacing: 0.08em;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -153,12 +159,13 @@ const quickLinks = [
   font-size: clamp(2rem, 5vw, 3.3rem);
   line-height: 1.08;
   font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .hero-desc {
   margin: 18px 0 0;
   max-width: 760px;
-  font-size: 1.05rem;
+  font-size: 1.03rem;
   line-height: 1.75;
   color: var(--text-secondary);
 }
@@ -171,25 +178,13 @@ const quickLinks = [
 }
 
 .hero-tag {
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgb(5, 150, 105);
-  color: rgb(6, 95, 70);
-  padding: 5px 12px;
-  border-radius: 999px;
-  font-size: 0.82rem;
-  font-weight: 600;
-}
-
-.dark .hero-tag {
-  background: rgba(16, 185, 129, 0.22);
-  border-color: rgb(16, 185, 129);
-  color: rgb(167, 243, 208);
+  padding: 5px 11px;
 }
 
 .hero-actions {
   margin-top: 24px;
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
@@ -198,50 +193,53 @@ const quickLinks = [
   align-items: center;
   justify-content: center;
   min-width: 128px;
-  height: 44px;
-  padding: 0 16px;
+  height: 40px;
+  padding: 0 14px;
   border-radius: 10px;
   text-decoration: none;
+  font-size: 0.92rem;
   font-weight: 600;
-  transition: background-color 0.24s ease, color 0.24s ease, border-color 0.24s ease;
+  border: 1px solid transparent;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .hero-btn-solid {
   background: var(--text-primary);
   color: var(--bg-primary);
-  border: 1px solid var(--text-primary);
+  border-color: var(--text-primary);
 }
 
 .hero-btn-solid:hover {
-  background: transparent;
-  color: var(--text-primary);
+  background: color-mix(in srgb, var(--text-primary) 90%, transparent);
+  box-shadow: var(--shadow-md);
 }
 
 .hero-btn-ghost {
-  background: transparent;
+  background: var(--bg-primary);
   color: var(--text-primary);
-  border: 1px solid var(--border-color);
+  border-color: var(--border-color);
 }
 
 .hero-btn-ghost:hover {
-  border-color: var(--text-secondary);
-  color: var(--text-secondary);
+  border-color: color-mix(in srgb, var(--text-primary) 20%, var(--border-color));
+  background: var(--bg-secondary);
 }
 
 .projects-section,
 .links-section {
-  padding: 20px 40px 70px;
+  padding: 18px 40px 68px;
 }
 
 .section-head {
   max-width: 1100px;
-  margin: 0 auto 24px;
+  margin: 0 auto 20px;
 }
 
 .section-head h2 {
   margin: 0;
-  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-size: clamp(1.5rem, 2.4vw, 2.05rem);
   color: var(--text-primary);
+  letter-spacing: -0.01em;
 }
 
 .section-head p {
@@ -255,7 +253,7 @@ const quickLinks = [
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: 14px;
 }
 
 .project-card,
@@ -265,13 +263,13 @@ const quickLinks = [
   border: 1px solid var(--border-color);
   background: var(--bg-secondary);
   box-shadow: var(--shadow-sm);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .project-card:hover,
 .link-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--text-secondary);
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--text-primary) 12%, var(--border-color));
   box-shadow: var(--shadow-md);
 }
 
@@ -286,25 +284,36 @@ const quickLinks = [
 .link-card h3 {
   margin: 0;
   color: var(--text-primary);
-  font-size: 1.2rem;
+  font-size: 1.16rem;
+  letter-spacing: -0.01em;
 }
 
 .project-state {
   padding: 4px 10px;
   border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-size: 0.74rem;
+  font-weight: 600;
   border: 1px solid transparent;
 }
 
 .state-active {
-  background: rgba(34, 197, 94, 0.15);
+  background: rgba(34, 197, 94, 0.13);
   color: #166534;
-  border-color: rgba(34, 197, 94, 0.35);
+  border-color: rgba(34, 197, 94, 0.32);
+}
+
+.state-paused {
+  background: rgba(245, 158, 11, 0.14);
+  color: #92400e;
+  border-color: rgba(245, 158, 11, 0.34);
 }
 
 .dark .state-active {
-  color: #86efac;
+  color: #bbf7d0;
+}
+
+.dark .state-paused {
+  color: #fcd34d;
 }
 
 .project-card p,
@@ -326,17 +335,19 @@ const quickLinks = [
   align-items: center;
   justify-content: center;
   padding: 7px 11px;
-  border-radius: 8px;
+  border-radius: 9px;
   border: 1px solid var(--border-color);
   color: var(--text-primary);
+  background: var(--bg-primary);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 500;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .project-link:hover {
-  border-color: var(--text-secondary);
-  color: var(--text-secondary);
+  border-color: color-mix(in srgb, var(--text-primary) 20%, var(--border-color));
+  background: var(--bg-secondary);
 }
 
 .link-card {
@@ -364,12 +375,16 @@ const quickLinks = [
 
   .hero-bg {
     inset: 10px 20px 8px;
-    min-height: 340px;
+    min-height: 350px;
     border-radius: 14px;
   }
 
   .hero-inner {
-    padding: 22px 16px;
+    padding: 20px 14px;
+  }
+
+  .hero-actions {
+    gap: 8px;
   }
 }
 </style>

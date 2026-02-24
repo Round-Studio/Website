@@ -14,11 +14,11 @@
 
 <script setup>
 import { computed } from 'vue'
-import { 
+import {
   InformationCircleIcon,
   ExclamationTriangleIcon,
   ExclamationCircleIcon,
-  CheckCircleIcon 
+  CheckCircleIcon
 } from '@heroicons/vue/24/outline'
 
 const props = defineProps({
@@ -50,27 +50,27 @@ const iconComponent = computed(() => {
 <style scoped>
 .docs-alert-container {
   display: flex;
-  justify-content: center; /* 水平居中 */
+  justify-content: center;
   width: 100%;
 }
 
 .docs-alert {
   display: flex;
   gap: 12px;
-  width: 500px;
-  padding: 16px;
-  border-radius: 6px;
-  margin: 16px 0;
-  border-left: 0px solid;
+  width: min(100%, 760px);
+  padding: 14px 16px;
+  border-radius: 12px;
+  margin: 14px 0;
+  border: 1px solid var(--alert-border);
   background-color: var(--alert-bg);
-  border-color: var(--alert-border);
   color: var(--alert-text);
+  box-shadow: var(--shadow-sm);
 }
 
 .docs-alert__icon {
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   margin-top: 2px;
 }
 
@@ -86,51 +86,54 @@ const iconComponent = computed(() => {
 
 .docs-alert__title {
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
+}
+
+.docs-alert__message {
+  color: color-mix(in srgb, var(--alert-text) 88%, transparent);
 }
 
 .docs-alert--info {
   --alert-bg: rgba(59, 130, 246, 0.1);
-  --alert-border: rgb(59, 130, 246);
-  --alert-text: rgb(29, 78, 216);
+  --alert-border: rgba(59, 130, 246, 0.34);
+  --alert-text: rgb(30, 64, 175);
 }
 
 .docs-alert--warning {
-  --alert-bg: rgba(245, 158, 11, 0.12);
-  --alert-border: rgb(217, 119, 6);
+  --alert-bg: rgba(245, 158, 11, 0.1);
+  --alert-border: rgba(245, 158, 11, 0.34);
   --alert-text: rgb(146, 64, 14);
 }
 
 .docs-alert--danger {
-  --alert-bg: rgba(239, 68, 68, 0.12);
-  --alert-border: rgb(220, 38, 38);
+  --alert-bg: rgba(239, 68, 68, 0.1);
+  --alert-border: rgba(239, 68, 68, 0.34);
   --alert-text: rgb(153, 27, 27);
 }
 
 .docs-alert--success {
-  --alert-bg: rgba(16, 185, 129, 0.12);
-  --alert-border: rgb(5, 150, 105);
-  --alert-text: rgb(6, 95, 70);
+  --alert-bg: rgba(34, 197, 94, 0.1);
+  --alert-border: rgba(34, 197, 94, 0.34);
+  --alert-text: rgb(21, 128, 61);
 }
 
-/* 暗色模式适配 */
 .dark .docs-alert--info {
-  --alert-bg: rgba(59, 130, 246, 0.22);
+  --alert-bg: rgba(59, 130, 246, 0.18);
   --alert-text: rgb(191, 219, 254);
 }
 
 .dark .docs-alert--warning {
-  --alert-bg: rgba(245, 158, 11, 0.2);
+  --alert-bg: rgba(245, 158, 11, 0.18);
   --alert-text: rgb(253, 230, 138);
 }
 
 .dark .docs-alert--danger {
-  --alert-bg: rgba(239, 68, 68, 0.2);
+  --alert-bg: rgba(239, 68, 68, 0.18);
   --alert-text: rgb(254, 202, 202);
 }
 
 .dark .docs-alert--success {
-  --alert-bg: rgba(16, 185, 129, 0.2);
-  --alert-text: rgb(167, 243, 208);
+  --alert-bg: rgba(34, 197, 94, 0.18);
+  --alert-text: rgb(187, 247, 208);
 }
 </style>

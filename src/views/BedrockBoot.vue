@@ -41,7 +41,7 @@
       <div class="container">
         <div class="section-header">
           <h2 class="section-title gradient-text-secondary">核心特性</h2>
-          <p class="section-subtitle">对齐仓库 README 的能力描述，聚焦 v2 版本体验。</p>
+          <p class="section-subtitle">优秀的 UI / UX，注重用户体验与交互细节。</p>
         </div>
 
         <div class="feature-grid">
@@ -57,7 +57,7 @@
       <div class="container">
         <div class="section-header">
           <h2 class="section-title gradient-text-secondary">生态与入口</h2>
-          <p class="section-subtitle">下载、文档、反馈与社区入口统一整理。</p>
+          <p class="section-subtitle">BedrockBoot 相关页面</p>
         </div>
 
         <div class="link-grid">
@@ -121,7 +121,7 @@ const links = [
   {
     title: '产品下载页',
     description: '前往 Round Studio 官方下载入口获取 BedrockBoot 构建。',
-    href: 'https://roundstudio.top/bedrockboot'
+    href: '/download/bedrockboot'
   },
   {
     title: 'GitHub Releases',
@@ -131,12 +131,7 @@ const links = [
   {
     title: '产品文档',
     description: '查看 BedrockBoot 介绍与使用文档。',
-    href: 'https://docs.roundstudio.top/docs/%E6%96%87%E6%A1%A3/%E4%BA%A7%E5%93%81%E6%96%87%E6%A1%A3/BedrockBoot/AboutBedrockBoot'
-  },
-  {
-    title: 'GitHub Discussions',
-    description: '参与功能建议、问题讨论和社区交流。',
-    href: 'https://github.com/Round-Studio/BedrockBoot/discussions'
+    href: 'https://docs.roundstudio.top/docs/product/bb'
   }
 ]
 </script>

@@ -1,14 +1,17 @@
-﻿<template>
+<template>
   <button
-    @click="toggleTheme"
+    @click="onToggle"
     class="theme-toggle"
     :title="isDark ? '切换到浅色模式' : '切换到深色模式'"
+    :aria-label="isDark ? '当前深色模式，点击切换到浅色模式' : '当前浅色模式，点击切换到深色模式'"
+    :aria-pressed="isDark ? 'true' : 'false'"
+    type="button"
   >
     <transition name="icon-fade" mode="out-in">
       <svg
         v-if="isDark"
         key="sun"
-        class="icon"
+        class="theme-icon"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -23,7 +26,7 @@
       <svg
         v-else
         key="moon"
-        class="icon"
+        class="theme-icon"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -43,61 +46,67 @@
 import { useTheme } from '../composables/useTheme'
 
 const { isDark, toggleTheme } = useTheme()
+
+const onToggle = (event) => {
+  toggleTheme(event)
+}
 </script>
 
 <style scoped>
 .theme-toggle {
-  position: relative;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  border: 2px solid var(--border-color);
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
   background: var(--bg-secondary);
   color: var(--text-primary);
   cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
 .theme-toggle:hover {
-  border-color: var(--primary-blue);
-  background: var(--gradient-primary);
-  color: white;
-  transform: scale(1.05);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--text-primary) 22%, var(--border-color));
+  background: var(--bg-tertiary);
+  box-shadow: var(--shadow-md);
 }
 
-.icon {
-  width: 20px;
-  height: 20px;
-  transition: all 0.3s ease;
+.theme-toggle:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ring-color);
+}
+
+.theme-icon {
+  width: 19px;
+  height: 19px;
 }
 
 .icon-fade-enter-active,
 .icon-fade-leave-active {
-  transition: all 0.3s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .icon-fade-enter-from {
   opacity: 0;
-  transform: rotate(180deg) scale(0.5);
+  transform: rotate(24deg) scale(0.72);
 }
 
 .icon-fade-leave-to {
   opacity: 0;
-  transform: rotate(-180deg) scale(0.5);
+  transform: rotate(-24deg) scale(0.72);
 }
 
 @media (max-width: 768px) {
   .theme-toggle {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
   }
-  
-  .icon {
+
+  .theme-icon {
     width: 18px;
     height: 18px;
   }

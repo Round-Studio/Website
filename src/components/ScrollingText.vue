@@ -1,24 +1,31 @@
-﻿<template>
+<template>
   <div class="scrolling-text-container" ref="containerRef">
-    <div class="scrolling-text">
-      <div class="scrolling-content" ref="contentRef">
-        <span
-          v-for="(group, groupIndex) in textGroups"
-          :key="group.id"
-          class="text-group"
-          :style="{ transform: `translateX(${group.position}px)` }"
-        >
-          <span v-for="(text, index) in textList" :key="`${group.id}-${index}`" class="text-item">
+    <div
+      class="scrolling-content"
+      :style="{
+        '--set-width': `${setWidth}px`,
+        '--marquee-duration': `${durationSeconds}s`
+      }"
+    >
+      <div class="scrolling-track" :class="{ ready: isReady }">
+        <span v-for="copyIndex in copyCount" :key="`copy-${copyIndex}`" class="track-set" aria-hidden="true">
+          <span v-for="(text, index) in normalizedTextList" :key="`${copyIndex}-${index}-${text}`" class="text-item">
             {{ text }}
           </span>
         </span>
       </div>
+
+      <span ref="rulerRef" class="track-set ruler" aria-hidden="true">
+        <span v-for="(text, index) in normalizedTextList" :key="`ruler-${index}-${text}`" class="text-item">
+          {{ text }}
+        </span>
+      </span>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, nextTick, computed } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
 const props = defineProps({
   textList: {
@@ -28,170 +35,169 @@ const props = defineProps({
 })
 
 const containerRef = ref(null)
-const contentRef = ref(null)
+const rulerRef = ref(null)
 const containerWidth = ref(0)
-const groupWidth = ref(0)
-const textGroups = ref([])
-const animationId = ref(null)
-const speed = ref(50) // 像素/秒
+const setWidth = ref(0)
+const isReady = ref(false)
+let resizeObserver = null
 
-// 计算需要的组数
-const groupCount = computed(() => {
-  if (containerWidth.value === 0 || groupWidth.value === 0) return 3
-  // 至少需要能填满屏幕宽度 + 一个额外组用于无缝循环
-  return Math.ceil(containerWidth.value / groupWidth.value) + 2
+const normalizedTextList = computed(() => {
+  const list = Array.isArray(props.textList)
+    ? props.textList.map((item) => String(item).trim()).filter(Boolean)
+    : []
+
+  return list.length > 0 ? list : ['Round Studio']
 })
 
-// 初始化文字组
-const initTextGroups = () => {
-  textGroups.value = []
-  const groupSpacing = groupWidth.value // 组之间的间距就是组的宽度
-  for (let i = 0; i < groupCount.value; i++) {
-    textGroups.value.push({
-      id: `group-${i}-${Date.now()}`,
-      position: i * groupSpacing
-    })
-  }
-}
+const speedPxPerSecond = computed(() => {
+  const minSpeed = 30
+  const maxSpeed = 85
+  const viewportFactor = containerWidth.value / 24
+  const textDensityFactor = Math.min(normalizedTextList.value.length, 12) * 2.8
+  const speed = viewportFactor + textDensityFactor
+  return Math.min(maxSpeed, Math.max(minSpeed, speed))
+})
 
-// 测量单组文字的宽度
-const measureGroupWidth = async () => {
-  // 估算宽度：每个字符约1.2rem，间距8rem
-  const avgCharWidth = 1.5 // rem
-  const itemSpacing = 8 // rem
-  const remInPx = 16 // 1rem = 16px
-
-  let totalWidth = 0
-  props.textList.forEach(text => {
-    totalWidth += (text.length * avgCharWidth + itemSpacing) * remInPx
-  })
-
-  groupWidth.value = totalWidth
-}
-
-// 更新容器宽度
-const updateContainerWidth = () => {
-  if (containerRef.value) {
-    containerWidth.value = containerRef.value.offsetWidth
-  }
-}
-
-// 动画循环
-const animate = () => {
-  const groupSpacing = groupWidth.value
-
-  textGroups.value.forEach(group => {
-    group.position -= speed.value / 60 // 60fps
-
-    // 如果组完全移出左侧，将其移动到最右侧
-    if (group.position + groupWidth.value < 0) {
-      const maxPosition = Math.max(...textGroups.value.map(g => g.position))
-      group.position = maxPosition + groupSpacing
-      // 更新ID以触发重新渲染
-      group.id = `group-${Date.now()}-${Math.random()}`
-    }
-  })
-
-  animationId.value = requestAnimationFrame(animate)
-}
-
-// 重新初始化
-const reinitialize = async () => {
-  if (animationId.value) {
-    cancelAnimationFrame(animationId.value)
+const durationSeconds = computed(() => {
+  if (setWidth.value <= 0) {
+    return 18
   }
 
+  return Number((setWidth.value / speedPxPerSecond.value).toFixed(2))
+})
+
+const copyCount = computed(() => {
+  if (setWidth.value <= 0 || containerWidth.value <= 0) {
+    return 3
+  }
+
+  return Math.max(3, Math.ceil(containerWidth.value / setWidth.value) + 2)
+})
+
+const measure = async () => {
   await nextTick()
-  updateContainerWidth()
-  await measureGroupWidth()
-  initTextGroups()
-  animate()
+
+  if (containerRef.value) {
+    containerWidth.value = Math.ceil(containerRef.value.offsetWidth)
+  }
+
+  if (rulerRef.value) {
+    setWidth.value = Math.ceil(rulerRef.value.offsetWidth)
+  }
+
+  isReady.value = setWidth.value > 0
 }
 
-// 窗口大小变化处理
-const handleResize = () => {
-  reinitialize()
-}
+watch(
+  () => props.textList,
+  async () => {
+    isReady.value = false
+    await measure()
+  },
+  { deep: true }
+)
 
 onMounted(async () => {
-  await nextTick()
-  await reinitialize()
-  window.addEventListener('resize', handleResize)
+  await measure()
+
+  if (window.ResizeObserver) {
+    resizeObserver = new ResizeObserver(async () => {
+      isReady.value = false
+      await measure()
+    })
+
+    if (containerRef.value) {
+      resizeObserver.observe(containerRef.value)
+    }
+  } else {
+    window.addEventListener('resize', measure)
+  }
 })
 
 onUnmounted(() => {
-  if (animationId.value) {
-    cancelAnimationFrame(animationId.value)
+  if (resizeObserver) {
+    resizeObserver.disconnect()
+  } else {
+    window.removeEventListener('resize', measure)
   }
-  window.removeEventListener('resize', handleResize)
 })
 </script>
 
 <style scoped>
 .scrolling-text-container {
+  --item-gap: clamp(2.8rem, 5.5vw, 7.5rem);
   width: 100%;
   overflow: hidden;
   background: transparent;
   padding: 24px 0;
   position: relative;
-  opacity: 0.7;
-}
-
-.scrolling-text {
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
+  opacity: 0.72;
 }
 
 .scrolling-content {
   position: relative;
   height: 3rem;
-  font-size: 2rem;
-  letter-spacing: 0.15em;
+  font-size: clamp(1.25rem, 2.4vw, 2rem);
+  letter-spacing: 0.1em;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-.text-group {
-  position: absolute;
-  top: 0;
-  left: 0;
+.scrolling-track {
+  display: inline-flex;
+  width: max-content;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+.scrolling-track.ready {
+  animation: marquee-scroll var(--marquee-duration) linear infinite;
+}
+
+.track-set {
   display: inline-flex;
   white-space: nowrap;
-  will-change: transform;
 }
 
 .text-item {
   display: inline-block;
-  margin-right: 8rem;
+  margin-right: var(--item-gap);
   color: var(--text-secondary);
   font-weight: 500;
-  opacity: 0.6;
+  opacity: 0.68;
   flex-shrink: 0;
 }
 
-/* 响应式调整 */
+.ruler {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  left: -9999px;
+  top: -9999px;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(calc(-1 * var(--set-width)), 0, 0);
+  }
+}
+
 @media (max-width: 768px) {
   .scrolling-text-container {
-    padding: 20px 0;
+    padding: 18px 0;
   }
 
   .scrolling-content {
-    font-size: 1.5rem;
-    height: 2.5rem;
-  }
-
-  .text-item {
-    margin-right: 6rem;
+    height: 2.4rem;
   }
 }
 
 @media (max-width: 480px) {
   .scrolling-content {
-    font-size: 1.25rem;
     height: 2rem;
-  }
-
-  .text-item {
-    margin-right: 4rem;
   }
 }
 </style>

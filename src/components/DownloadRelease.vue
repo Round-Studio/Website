@@ -3,38 +3,31 @@
     <div class="downloads-header">
       <h3 class="downloads-title">构建文件下载</h3>
       <div class="downloads-meta">
-        <span v-if="release" class="version-tag">{{ release.tag_name }}</span>
+        <span v-if="release" class="version-tag success-badge">{{ release.tag_name }}</span>
         <span v-if="release" class="release-date">{{ formatDate(release.published_at) }}</span>
       </div>
     </div>
-    
+
     <div class="downloads-content">
-      <!-- 加载状态 -->
       <div v-if="loading" class="loading-state">
         <div class="loading-spinner"></div>
         <span>正在加载构建文件...</span>
       </div>
-      
-      <!-- 错误状态 -->
+
       <div v-else-if="error" class="error-state">
-        <div class="error-icon">⚠️</div>
+        <div class="state-icon">⚠️</div>
         <span>{{ error }}</span>
         <button @click="retryFetch" class="retry-btn">重试</button>
       </div>
-      
-      <!-- 空状态 -->
+
       <div v-else-if="!assets || assets.length === 0" class="empty-state">
-        <div class="empty-icon">📦</div>
+        <div class="state-icon">📦</div>
         <span>暂无构建文件</span>
       </div>
-      
-      <!-- 文件列表 -->
+
       <div v-else class="downloads-list">
         <div v-for="asset in assets" :key="asset.id" class="download-item">
           <div class="file-info">
-            <div class="file-icon">
-              📄
-            </div>
             <div class="file-details">
               <span class="file-name">{{ asset.name }}</span>
               <div class="file-meta">
@@ -48,18 +41,17 @@
             class="download-btn"
             target="_blank"
             @click="trackDownload(asset.name)"
+            rel="noreferrer"
           >
-            <span class="btn-icon">⬇️</span>
             下载
           </a>
         </div>
       </div>
     </div>
-    
-    <!-- 底部信息 -->
+
     <div v-if="assets && assets.length > 0" class="downloads-footer">
       <p class="total-info">
-        共 {{ assets.length }} 个文件 • 
+        共 {{ assets.length }} 个文件 •
         总大小: {{ formatFileSize(totalSize) }}
       </p>
     </div>
@@ -69,7 +61,6 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 
-// Props
 const props = defineProps({
   release: {
     type: Object,
@@ -85,17 +76,14 @@ const props = defineProps({
   }
 })
 
-// Reactive data
 const assets = ref([])
 const loading = ref(false)
 const error = ref(null)
 
-// Computed properties
 const totalSize = computed(() => {
   return assets.value.reduce((total, asset) => total + asset.size, 0)
 })
 
-// Methods
 const fetchAssets = async () => {
   if (!props.release) {
     assets.value = []
@@ -105,12 +93,10 @@ const fetchAssets = async () => {
   try {
     loading.value = true
     error.value = null
-    
-    // 如果 release 数据中已经包含 assets，直接使用
+
     if (props.release.assets && props.release.assets.length > 0) {
       assets.value = props.release.assets
     } else {
-      // 否则调用 API 获取 assets
       const response = await fetch(props.release.assets_url)
       if (!response.ok) {
         throw new Error('获取构建文件失败')
@@ -148,19 +134,15 @@ const formatFileSize = (bytes) => {
 }
 
 const trackDownload = (fileName) => {
-  // 这里可以添加下载跟踪逻辑，比如发送到分析服务
   console.log(`下载文件: ${fileName}`)
-  // 示例: analytics.track('asset_download', { file: fileName })
 }
 
-// Watchers
 watch(() => props.release, (newRelease) => {
   if (newRelease) {
     fetchAssets()
   }
 })
 
-// Lifecycle
 onMounted(() => {
   if (props.release) {
     fetchAssets()
@@ -171,9 +153,9 @@ onMounted(() => {
 <style scoped>
 .downloads-container {
   background: var(--bg-secondary);
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: var(--shadow-md);
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-color);
 }
 
@@ -181,12 +163,12 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .downloads-title {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 700;
   color: var(--text-primary);
   margin: 0;
 }
@@ -195,29 +177,24 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 4px;
+  gap: 6px;
 }
 
 .version-tag {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 0.8rem;
+  padding: 3px 8px;
+  font-size: 0.75rem;
   font-weight: 600;
 }
 
 .release-date {
   font-size: 0.8rem;
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 
 .downloads-content {
-  min-height: 120px;
+  min-height: 110px;
 }
 
-/* 状态样式 */
 .loading-state,
 .error-state,
 .empty-state {
@@ -225,132 +202,122 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
+  padding: 32px 18px;
   text-align: center;
   color: var(--text-secondary);
 }
 
 .loading-spinner {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border: 2px solid var(--border-color);
-  border-top: 2px solid var(--gradient-primary);
+  border-top-color: var(--text-primary);
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
-.error-icon,
-.empty-icon {
-  font-size: 2rem;
-  margin-bottom: 12px;
+.state-icon {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
 }
 
 .retry-btn {
-  margin-top: 12px;
-  padding: 8px 16px;
+  margin-top: 10px;
+  padding: 8px 14px;
   background: var(--text-primary);
   color: var(--bg-primary);
   border: 1px solid var(--text-primary);
-  border-radius: 6px;
+  border-radius: 9px;
   cursor: pointer;
-  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .retry-btn:hover {
-  background: transparent;
-  color: var(--text-primary);
+  background: color-mix(in srgb, var(--text-primary) 90%, transparent);
 }
 
-/* 文件列表样式 */
 .downloads-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .download-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
+  padding: 14px;
   background: var(--bg-primary);
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid var(--border-color);
-  transition: all 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .download-item:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--text-secondary);
+  box-shadow: var(--shadow-sm);
+  border-color: color-mix(in srgb, var(--text-primary) 16%, var(--border-color));
 }
 
 .file-info {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   flex: 1;
-}
-
-.file-icon {
-  font-size: 1.5rem;
 }
 
 .file-details {
   display: flex;
   flex-direction: column;
   flex: 1;
+  min-width: 0;
 }
 
 .file-name {
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .file-meta {
   display: flex;
-  gap: 12px;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
+  gap: 10px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
 }
 
 .download-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
+  justify-content: center;
+  padding: 8px 14px;
   background: var(--text-primary);
   color: var(--bg-primary);
   border: 1px solid var(--text-primary);
-  border-radius: 6px;
+  border-radius: 9px;
   text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
   white-space: nowrap;
 }
 
 .download-btn:hover {
-  background: transparent;
-  color: var(--text-primary);
-  border-color: var(--text-secondary);
+  background: color-mix(in srgb, var(--text-primary) 90%, transparent);
 }
 
-.btn-icon {
-  font-size: 0.9rem;
-}
-
-/* 底部信息 */
 .downloads-footer {
-  margin-top: 16px;
-  padding-top: 16px;
+  margin-top: 14px;
+  padding-top: 14px;
   border-top: 1px solid var(--border-color);
 }
 
 .total-info {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+  font-size: 0.86rem;
+  color: var(--text-muted);
   text-align: center;
   margin: 0;
 }
@@ -360,35 +327,34 @@ onMounted(() => {
   100% { transform: rotate(360deg); }
 }
 
-/* 响应式设计 */
 @media (max-width: 768px) {
   .downloads-container {
     padding: 16px;
   }
-  
+
   .downloads-header {
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     align-items: flex-start;
   }
-  
+
   .downloads-meta {
     align-items: flex-start;
   }
-  
+
   .download-item {
     flex-direction: column;
     align-items: stretch;
-    gap: 12px;
+    gap: 10px;
   }
-  
-  .file-info {
-    width: 100%;
+
+  .file-meta {
+    flex-direction: column;
+    gap: 4px;
   }
-  
+
   .download-btn {
     width: 100%;
-    justify-content: center;
   }
 }
 </style>

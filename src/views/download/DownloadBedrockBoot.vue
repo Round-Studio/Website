@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="bb">
     <!-- Hero Section -->
     <section class="hero">
@@ -14,7 +14,7 @@
               新一代 Minecraft BedrockBoot 启动器
             </p>
             <div v-if="latestRelease" class="version-info">
-              <p>最新版本: <strong>{{ latestRelease.tag_name }}</strong></p>
+              <p>最新版本: <span class="success-badge version-badge">{{ latestRelease.tag_name }}</span></p>
               <p v-if="latestRelease.published_at">发布于: {{ formatDate(latestRelease.published_at) }}</p>
             </div>
             <div class="hero-actions">
@@ -148,6 +148,11 @@ onMounted(() => {
 
 .version-info p {
   margin: 5px 0;
+}
+
+.version-badge {
+  margin-left: 6px;
+  vertical-align: middle;
 }
 
 .hero-btn {
