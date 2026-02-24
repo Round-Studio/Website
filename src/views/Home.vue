@@ -3,17 +3,18 @@
     <section class="hero-section">
       <div class="hero-bg" aria-hidden="true"></div>
       <div class="hero-inner">
-        <p class="hero-kicker">Round Studio</p>
-        <h1 class="hero-title">为 Minecraft 玩家打造稳定、清晰、可持续迭代的启动体验</h1>
+        <p class="hero-kicker">为 Minecraft 玩家打造稳定、清晰、可持续迭代的启动体验</p>
+        <h1 class="hero-title">Round Studio</h1>
         <p class="hero-desc">
-          当前主线产品聚焦 <span class="gradient-text">RMCL</span> 与 <span class="gradient-text">BedrockBoot</span>。
-          我们强调工程质量、长期维护和开源协作。
+          源自于 <span class="gradient-text">RMCL</span> 开发组。
         </p>
         <div class="hero-tags">
           <span class="hero-tag success-badge">跨平台</span>
           <span class="hero-tag success-badge">Minecraft</span>
           <span class="hero-tag success-badge">dotNET C#</span>
-          <span class="hero-tag success-badge">OnePointUI / Avalonia / WinUI</span>
+          <span class="hero-tag success-badge">Java</span>
+          <span class="hero-tag success-badge">C++</span>
+          <span class="hero-tag success-badge">OnePointUI / Avalonia / WinUI / WPF</span>
         </div>
         <div class="hero-actions">
           <RouterLink to="/bedrockboot" class="hero-btn hero-btn-solid">查看 BedrockBoot</RouterLink>
@@ -26,7 +27,7 @@
     <section id="projects" class="projects-section">
       <div class="section-head">
         <h2>核心项目</h2>
-        <p>首页入口只保留当前可访问、持续维护中的产品页面。</p>
+        <p>我们正在开发和维护的项目</p>
       </div>
 
       <div class="projects-grid">

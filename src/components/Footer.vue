@@ -37,7 +37,7 @@
           <ul class="footer-links">
             <li><router-link to="/rmcl">RMCL</router-link></li>
             <li><router-link to="/bedrockboot">BedrockBoot</router-link></li>
-            <li><router-link to="/download/bedrockboot">BedrockBoot 下载</router-link></li>
+            <li><a href="https://docs.roundstudio.top/docs/product/blc">BedrockLauncher.Core</a></li>
           </ul>
         </section>
 
