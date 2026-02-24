@@ -90,26 +90,26 @@ onUnmounted(() => {
 .loading-progress {
   height: 100%;
   background: var(--gradient-primary);
-  transition: width 0.2s ease;
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(80, 80, 80, 0.35);
   border-radius: 0 3px 3px 0;
 }
 
 /* 暗色主题适配 */
 .dark .loading-progress {
-  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 /* 脉冲效果 */
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 10px rgba(80, 80, 80, 0.3);
   }
   50% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+    box-shadow: 0 0 16px rgba(120, 120, 120, 0.4);
   }
   100% {
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 10px rgba(80, 80, 80, 0.3);
   }
 }
 

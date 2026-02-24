@@ -96,41 +96,41 @@ const iconComponent = computed(() => {
 }
 
 .docs-alert--warning {
-  --alert-bg: rgba(234, 179, 8, 0.1);
-  --alert-border: rgb(234, 179, 8);
-  --alert-text: rgb(180, 83, 9);
+  --alert-bg: rgba(245, 158, 11, 0.12);
+  --alert-border: rgb(217, 119, 6);
+  --alert-text: rgb(146, 64, 14);
 }
 
 .docs-alert--danger {
-  --alert-bg: rgba(239, 68, 68, 0.1);
-  --alert-border: rgb(239, 68, 68);
-  --alert-text: rgb(185, 28, 28);
+  --alert-bg: rgba(239, 68, 68, 0.12);
+  --alert-border: rgb(220, 38, 38);
+  --alert-text: rgb(153, 27, 27);
 }
 
 .docs-alert--success {
-  --alert-bg: rgba(16, 185, 129, 0.1);
-  --alert-border: rgb(16, 185, 129);
-  --alert-text: rgb(5, 122, 85);
+  --alert-bg: rgba(16, 185, 129, 0.12);
+  --alert-border: rgb(5, 150, 105);
+  --alert-text: rgb(6, 95, 70);
 }
 
 /* 暗色模式适配 */
 .dark .docs-alert--info {
-  --alert-bg: rgba(59, 130, 246, 0.2);
-  --alert-text: rgb(147, 197, 253);
+  --alert-bg: rgba(59, 130, 246, 0.22);
+  --alert-text: rgb(191, 219, 254);
 }
 
 .dark .docs-alert--warning {
-  --alert-bg: rgba(234, 179, 8, 0.2);
-  --alert-text: rgb(253, 224, 71);
+  --alert-bg: rgba(245, 158, 11, 0.2);
+  --alert-text: rgb(253, 230, 138);
 }
 
 .dark .docs-alert--danger {
   --alert-bg: rgba(239, 68, 68, 0.2);
-  --alert-text: rgb(252, 165, 165);
+  --alert-text: rgb(254, 202, 202);
 }
 
 .dark .docs-alert--success {
   --alert-bg: rgba(16, 185, 129, 0.2);
-  --alert-text: rgb(110, 231, 183);
+  --alert-text: rgb(167, 243, 208);
 }
 </style>

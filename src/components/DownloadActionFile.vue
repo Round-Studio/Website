@@ -427,16 +427,17 @@ onMounted(() => {
 .retry-btn {
   margin-top: 12px;
   padding: 8px 16px;
-  background: var(--gradient-primary);
-  color: white;
-  border: none;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: 1px solid var(--text-primary);
   border-radius: 6px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .retry-btn:hover {
-  transform: translateY(-1px);
+  background: transparent;
+  color: var(--text-primary);
 }
 
 /* 文件列表样式 */
@@ -460,7 +461,7 @@ onMounted(() => {
 .download-item:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
-  border-color: var(--gradient-primary);
+  border-color: var(--text-secondary);
 }
 
 .file-info {
@@ -498,18 +499,20 @@ onMounted(() => {
   align-items: center;
   gap: 6px;
   padding: 8px 16px;
-  background: var(--gradient-primary);
-  color: white;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: 1px solid var(--text-primary);
   border-radius: 6px;
   text-decoration: none;
   font-weight: 500;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
   white-space: nowrap;
 }
 
 .download-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--text-secondary);
 }
 
 .btn-icon {

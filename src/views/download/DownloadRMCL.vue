@@ -20,14 +20,13 @@
             <div class="hero-actions">
               <a
                   v-if="latestRelease"
-                  class="btn-gradient"
-                  style="color: var(--text-primary)"
+                  class="hero-btn hero-btn-solid"
                   :href="latestRelease.html_url"
                   target="_blank"
               >
                 查看发布说明
               </a>
-              <a class="btn-outline" style="color: var(--text-primary)" href="https://github.com/Round-Studio/RMCL" target="_blank">
+              <a class="hero-btn hero-btn-ghost" href="https://github.com/Round-Studio/RMCL" target="_blank">
                 GitHub 仓库
               </a>
             </div>
@@ -93,7 +92,6 @@ onMounted(() => {
   min-height: 90vh;
   display: flex;
   align-items: center;
-  color: white;
   position: relative;
   overflow: hidden;
 }
@@ -153,32 +151,32 @@ onMounted(() => {
   margin: 5px 0;
 }
 
-.btn-gradient {
-  display: inline-block;
-  padding: 12px 24px;
-  border-radius: 8px;
-  background: var(--gradient-primary);
-  text-decoration: none;
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 10px;
   font-weight: 600;
-  transition: transform 0.2s ease;
-}
-
-.btn-gradient:hover {
-  transform: translateY(-2px);
-}
-
-.btn-outline {
-  display: inline-block;
-  padding: 12px 24px;
-  border-radius: 8px;
+  text-decoration: none;
   border: 1px solid var(--border-color);
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.2s ease;
 }
 
-.btn-outline:hover {
-  background: var(--bg-secondary);
+.hero-btn-solid {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
+}
+
+.hero-btn-ghost {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.hero-btn:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-secondary);
 }
 
 @media (max-width: 1024px) {

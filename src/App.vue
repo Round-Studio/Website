@@ -92,20 +92,20 @@ main {
 
 /* 增强的页面切换动画 */
 .page-enter-active {
-  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: opacity 0.32s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .page-leave-active {
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: opacity 0.28s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .page-enter-from {
   opacity: 0;
-  transform: translateY(30px) scale(0.98);
+  transform: translateY(10px);
 }
 
 .page-leave-to {
   opacity: 0;
-  transform: translateY(-30px) scale(1.02);
+  transform: translateY(-8px);
 }
 </style>

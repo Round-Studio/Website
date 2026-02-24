@@ -19,8 +19,8 @@
             </div>
           </p>
           <div class="hero-actions">
-            <RouterLink class="btn-gradient" style="color: var(--text-primary)" to="/download/rmcl">立即下载</RouterLink>
-            <a class="btn-outline" style="color: var(--text-primary)" href="https://github.com/Round-Studio/RMCL">前往 Github</a>
+            <RouterLink class="hero-btn hero-btn-solid" to="/download/rmcl">立即下载</RouterLink>
+            <a class="hero-btn hero-btn-ghost" href="https://github.com/Round-Studio/RMCL">前往 Github</a>
           </div>
         </div>
       </div>
@@ -77,9 +77,27 @@ import DocsAlert from '../components/DocsAlert.vue'
   min-height: 90vh;
   display: flex;
   align-items: center;
-  color: white;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(44rem 26rem at 18% 18%, rgba(140, 140, 140, 0.2) 0%, rgba(140, 140, 140, 0) 72%),
+    radial-gradient(36rem 22rem at 86% 24%, rgba(96, 96, 96, 0.15) 0%, rgba(96, 96, 96, 0) 74%),
+    linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 70%);
+}
+
+.dark .hero::before {
+  background:
+    radial-gradient(44rem 26rem at 18% 18%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 72%),
+    radial-gradient(36rem 22rem at 86% 24%, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 74%),
+    linear-gradient(180deg, #171717 0%, var(--bg-primary) 72%);
 }
 
 .hero-container {
@@ -109,6 +127,34 @@ import DocsAlert from '../components/DocsAlert.vue'
 .hero-actions {
   display: flex;
   gap: 16px;
+}
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--border-color);
+}
+
+.hero-btn-solid {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
+}
+
+.hero-btn-ghost {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.hero-btn:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-secondary);
 }
 
 .hero-visual {

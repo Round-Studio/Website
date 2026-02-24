@@ -332,12 +332,12 @@ onUnmounted(() => {
   position: absolute;
   background: var(--primary-blue);
   border-radius: 50%;
-  animation: float 20s infinite linear;
+  animation: float 24s infinite ease-in-out;
 }
 
 @keyframes float {
   0% {
-    transform: translateY(100vh) rotate(0deg);
+    transform: translateY(100vh);
     opacity: 0;
   }
   10% {
@@ -347,7 +347,7 @@ onUnmounted(() => {
     opacity: 1;
   }
   100% {
-    transform: translateY(-100px) rotate(360deg);
+    transform: translateY(-100px);
     opacity: 0;
   }
 }
@@ -361,8 +361,8 @@ onUnmounted(() => {
   border: 1px solid var(--border-color);
   z-index: 2;
   opacity: 0;
-  transform: translateY(50px) scale(0.95);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(18px) scale(0.98);
+  transition: opacity 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .carousel-container.animate-in {
@@ -393,7 +393,7 @@ onUnmounted(() => {
   display: flex;
   width: 100%;
   height: 100%;
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
   transform-style: preserve-3d;
 }
 
@@ -401,25 +401,25 @@ onUnmounted(() => {
   flex: 0 0 100%;
   width: 100%;
   height: 100%;
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: opacity 0.45s ease, transform 0.45s ease;
   transform-origin: center center;
 }
 
 .carousel-slide.active {
-  transform: scale(1) rotateY(0deg);
+  transform: scale(1);
   z-index: 3;
 }
 
 .carousel-slide.prev {
-  transform: scale(0.85) rotateY(-15deg) translateX(-20%);
+  transform: scale(0.95) translateX(-8%);
   z-index: 1;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .carousel-slide.next {
-  transform: scale(0.85) rotateY(15deg) translateX(20%);
+  transform: scale(0.95) translateX(8%);
   z-index: 1;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .project-image {
@@ -461,9 +461,9 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: opacity 0.45s ease, transform 0.45s ease;
   opacity: 0;
-  transform: scale(1.1);
+  transform: scale(1.04);
   z-index: 2;
   position: relative;
 }
@@ -483,7 +483,7 @@ onUnmounted(() => {
   color: white;
   transform: translateY(100%);
   opacity: 0;
-  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: opacity 0.45s ease, transform 0.45s ease;
   backdrop-filter: blur(20px);
 }
 
@@ -498,7 +498,7 @@ onUnmounted(() => {
 }
 
 .carousel-slide:hover .project-image img.loaded {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .project-title {
@@ -511,14 +511,14 @@ onUnmounted(() => {
 .title-char {
   display: inline-block;
   opacity: 0;
-  transform: translateY(20px) rotateX(90deg);
-  animation: charFadeIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  transform: translateY(10px);
+  animation: charFadeIn 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
 }
 
 @keyframes charFadeIn {
   to {
     opacity: 1;
-    transform: translateY(0) rotateX(0deg);
+    transform: translateY(0);
   }
 }
 
@@ -534,7 +534,7 @@ onUnmounted(() => {
   display: inline-block;
   opacity: 0;
   transform: translateY(10px);
-  animation: charSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: charSlideIn 0.35s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
 }
 
 @keyframes charSlideIn {
@@ -559,22 +559,18 @@ onUnmounted(() => {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   opacity: 0;
-  transform: scale(0) rotate(180deg);
-  animation: tagBounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  transform: translateY(8px);
+  animation: tagFadeIn 0.35s ease forwards;
 }
 
-@keyframes tagBounceIn {
+@keyframes tagFadeIn {
   0% {
     opacity: 0;
-    transform: scale(0) rotate(180deg);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.2) rotate(0deg);
+    transform: translateY(8px);
   }
   100% {
     opacity: 1;
-    transform: scale(1) rotate(0deg);
+    transform: translateY(0);
   }
 }
 
@@ -599,7 +595,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.28s ease, background-color 0.28s ease, box-shadow 0.28s ease;
   z-index: 10;
   backdrop-filter: blur(10px);
   overflow: hidden;
@@ -608,7 +604,7 @@ onUnmounted(() => {
 
 .carousel-btn:hover {
   background: rgba(255, 255, 255, 0.95);
-  transform: translateY(-50%) scale(1.15) rotate(5deg);
+  transform: translateY(-50%) scale(1.06);
   box-shadow: var(--shadow-xl);
 }
 
@@ -624,24 +620,7 @@ onUnmounted(() => {
 
 /* 按钮涟漪效果 */
 .btn-ripple {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(59, 130, 246, 0.3);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  animation: ripple 0.6s ease-out;
-  pointer-events: none;
-}
-
-@keyframes ripple {
-  to {
-    width: 100px;
-    height: 100px;
-    opacity: 0;
-  }
+  display: none;
 }
 
 /* 按钮脉冲效果 */
@@ -654,21 +633,21 @@ onUnmounted(() => {
   border-radius: 50%;
   background: var(--primary-blue);
   opacity: 0;
-  animation: pulse 2s infinite;
+  animation: none;
   pointer-events: none;
 }
 
 @keyframes pulse {
   0% {
-    transform: scale(1);
-    opacity: 0.7;
+    transform: scale(1.02);
+    opacity: 0.35;
   }
   50% {
-    transform: scale(1.2);
-    opacity: 0.3;
+    transform: scale(1.08);
+    opacity: 0.2;
   }
   100% {
-    transform: scale(1.4);
+    transform: scale(1.12);
     opacity: 0;
   }
 }
@@ -703,18 +682,18 @@ onUnmounted(() => {
 
 .carousel-btn-prev {
   left: 20px;
-  animation: slideInLeft 0.6s ease-out 0.3s both;
+  animation: slideInLeft 0.45s ease-out 0.2s both;
 }
 
 .carousel-btn-next {
   right: 20px;
-  animation: slideInRight 0.6s ease-out 0.4s both;
+  animation: slideInRight 0.45s ease-out 0.25s both;
 }
 
 @keyframes slideInLeft {
   from {
     opacity: 0;
-    transform: translateY(-50%) translateX(-100px);
+    transform: translateY(-50%) translateX(-40px);
   }
   to {
     opacity: 1;
@@ -725,7 +704,7 @@ onUnmounted(() => {
 @keyframes slideInRight {
   from {
     opacity: 0;
-    transform: translateY(-50%) translateX(100px);
+    transform: translateY(-50%) translateX(40px);
   }
   to {
     opacity: 1;
@@ -752,7 +731,7 @@ onUnmounted(() => {
   border: 2px solid rgba(255, 255, 255, 0.5);
   background: transparent;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.28s ease, border-color 0.28s ease;
   position: relative;
   overflow: hidden;
 }
@@ -766,31 +745,31 @@ onUnmounted(() => {
   background: var(--primary-blue);
   border-radius: 50%;
   transform: scale(0);
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.28s ease;
 }
 
 .indicator-progress.active {
   transform: scale(1);
-  animation: indicatorPulse 2s infinite;
+  animation: indicatorPulse 2.2s ease infinite;
 }
 
 @keyframes indicatorPulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+    box-shadow: 0 0 0 0 rgba(90, 90, 90, 0.5);
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+    box-shadow: 0 0 0 6px rgba(90, 90, 90, 0);
   }
 }
 
 .indicator.active {
   border-color: var(--primary-blue);
-  transform: scale(1.3);
+  transform: scale(1.15);
 }
 
 .indicator:hover {
   border-color: white;
-  transform: scale(1.4);
+  transform: scale(1.2);
 }
 
 @keyframes fadeInUp {
@@ -881,7 +860,7 @@ onUnmounted(() => {
 .separator {
   margin: 0 4px;
   opacity: 0.7;
-  animation: pulse 2s infinite;
+  animation: none;
 }
 
 /* 进度环 */
@@ -913,11 +892,11 @@ onUnmounted(() => {
 }
 
 .dark .current {
-  color: var(--primary-purple);
+  color: var(--text-secondary);
 }
 
 .dark .progress-ring-circle {
-  stroke: var(--primary-purple);
+  stroke: var(--text-secondary);
 }
 
 .sr-only {

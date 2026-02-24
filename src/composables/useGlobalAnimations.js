@@ -4,12 +4,9 @@ export function useGlobalAnimations() {
   const isLoading = ref(true)
   const scrollProgress = ref(0)
   const mousePosition = ref({ x: 0, y: 0 })
-  const cursorTrails = ref([])
   
   let animationFrame = null
   let scrollObserver = null
-  let cursorFollower = null
-  let cursorTrail = null
 
   // 初始化全局背景粒子
   const initBackgroundParticles = () => {
@@ -19,17 +16,17 @@ export function useGlobalAnimations() {
     // 清除现有粒子
     container.innerHTML = ''
 
-    // 创建50个粒子
-    for (let i = 0; i < 50; i++) {
+    // 创建更少的粒子，保持轻量动效
+    for (let i = 0; i < 16; i++) {
       const particle = document.createElement('div')
       particle.className = 'global-particle'
       
       // 随机属性
-      const size = Math.random() * 4 + 2
+      const size = Math.random() * 3 + 2
       const left = Math.random() * 100
-      const delay = Math.random() * 20
-      const duration = 15 + Math.random() * 10
-      const opacity = 0.05 + Math.random() * 0.1
+      const delay = Math.random() * 12
+      const duration = 24 + Math.random() * 10
+      const opacity = 0.04 + Math.random() * 0.05
       
       particle.style.cssText = `
         width: ${size}px;
@@ -59,8 +56,8 @@ export function useGlobalAnimations() {
         })
       },
       {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.12,
+        rootMargin: '0px 0px -20px 0px'
       }
     )
 
@@ -112,56 +109,13 @@ export function useGlobalAnimations() {
       }
     })
 
-    // 为所有按钮和链接添加增强效果
-    const buttons = document.querySelectorAll('button, .btn-outline, .btn-gradient')
+      // 为所有按钮和链接添加增强效果
+      const buttons = document.querySelectorAll('button, .btn-outline, .btn-gradient')
     buttons.forEach(btn => {
       if (!btn.classList.contains('btn-enhanced')) {
         btn.classList.add('btn-enhanced')
       }
     })
-
-    // 添加点击涟漪效果
-    const clickableElements = document.querySelectorAll('button, a, .clickable')
-    clickableElements.forEach(el => {
-      el.addEventListener('click', createRippleEffect)
-    })
-  }
-
-  // 创建点击涟漪效果
-  const createRippleEffect = (e) => {
-    const element = e.currentTarget
-    const rect = element.getBoundingClientRect()
-    const size = Math.max(rect.width, rect.height)
-    const x = e.clientX - rect.left - size / 2
-    const y = e.clientY - rect.top - size / 2
-
-    const ripple = document.createElement('div')
-    ripple.style.cssText = `
-      position: absolute;
-      width: ${size}px;
-      height: ${size}px;
-      left: ${x}px;
-      top: ${y}px;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      transform: scale(0);
-      animation: ripple 0.6s ease-out;
-      pointer-events: none;
-      z-index: 1000;
-    `
-
-    // 确保元素有相对定位
-    if (getComputedStyle(element).position === 'static') {
-      element.style.position = 'relative'
-    }
-    element.style.overflow = 'hidden'
-
-    element.appendChild(ripple)
-
-    // 移除涟漪元素
-    setTimeout(() => {
-      ripple.remove()
-    }, 600)
   }
 
   // 页面加载完成
@@ -175,7 +129,7 @@ export function useGlobalAnimations() {
           loadingOverlay.remove()
         }, 500)
       }
-    }, 1000)
+    }, 700)
   }
 
   // 初始化所有动画
@@ -184,11 +138,6 @@ export function useGlobalAnimations() {
       initBackgroundParticles()
       initScrollAnimations()
       enhanceInteractiveElements()
-      
-      // 在桌面设备上启用鼠标跟随
-      if (window.innerWidth > 768) {
-        initCursorFollower()
-      }
       
       // 滚动事件监听
       window.addEventListener('scroll', updateScrollProgress)
@@ -203,15 +152,7 @@ export function useGlobalAnimations() {
     if (scrollObserver) {
       scrollObserver.disconnect()
     }
-    
-    if (cursorFollower) {
-      cursorFollower.remove()
-    }
-    
-    cursorTrails.value.forEach(trail => {
-      trail.remove()
-    })
-    
+
     window.removeEventListener('scroll', updateScrollProgress)
     
     if (animationFrame) {
@@ -244,21 +185,4 @@ export function useGlobalAnimations() {
     cleanup,
     finishLoading
   }
-}
-
-// 添加涟漪动画的CSS
-const rippleCSS = `
-@keyframes ripple {
-  to {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-`
-
-// 动态添加CSS
-if (typeof document !== 'undefined') {
-  const style = document.createElement('style')
-  style.textContent = rippleCSS
-  document.head.appendChild(style)
 }

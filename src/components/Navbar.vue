@@ -4,7 +4,7 @@
       <!-- Logo -->
       <router-link to="/" class="logo" style="border-radius: 6px;padding: 8px;height: 48px">
         <img src="../assets/logo.ico" class="logo-icon"/>
-        <span class="logo-text gradient-text">Round Studio</span>
+        <span class="logo-text">Round Studio</span>
       </router-link>
 
       <!-- Desktop Navigation - 移动到左边 -->
@@ -73,7 +73,8 @@ const closeMobileMenu = () => {
 }
 
 .dark .navbar {
-  background: rgba(15, 23, 42, 0.8);
+  background: rgba(18, 18, 18, 0.86);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .nav-container {
@@ -122,6 +123,7 @@ const closeMobileMenu = () => {
   font-size: 24px;
   font-weight: 700;
   letter-spacing: -0.5px;
+  color: var(--text-primary);
 }
 
 .desktop-nav {
@@ -142,13 +144,14 @@ const closeMobileMenu = () => {
 }
 
 .nav-link:hover {
-  color: var(--primary-blue);
+  color: var(--text-primary);
   background: var(--bg-secondary);
 }
 
 .nav-link.router-link-active {
-  color: var(--primary-blue);
+  color: var(--text-primary);
   background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
 }
 
 .mobile-menu-btn {
@@ -195,7 +198,7 @@ const closeMobileMenu = () => {
 
 .mobile-nav-link:hover,
 .mobile-nav-link.router-link-active {
-  color: var(--primary-blue);
+  color: var(--text-primary);
   background: var(--bg-secondary);
 }
 

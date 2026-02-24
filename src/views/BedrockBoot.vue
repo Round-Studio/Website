@@ -1,70 +1,93 @@
-﻿<template>
+<template>
   <div class="bb">
-    <!-- Hero Section -->
     <section class="hero">
       <div class="hero-container">
         <div class="hero-content animate-fade-in-up">
-          <img src="./../assets/img/BedrockBootIcon.png" style="width: 120px;margin-bottom: 20px">
+          <img src="./../assets/img/BedrockBootIcon.png" style="width: 120px; margin-bottom: 20px">
           <h1 class="hero-title">
             欢迎使用
             <br>
             <span class="gradient-text gradient-text-titletext">BedrockBoot</span>
           </h1>
           <p class="hero-subtitle">
-            新一代 
-            <label class="gradient-text">Minecraft Bedrock for Windows</label>
-            启动器
+            为 Windows 平台打造的 Minecraft Bedrock 启动器
+            <br>
+            <label class="gradient-text">BedrockBoot v2.x</label> 基于 OnePointUI，支持多版本、多实例并存启动。
             <div class="border-capsule">
               ✨ OnePointUI
             </div>
             <div class="border-capsule">
               🎉 多版本 多实例
             </div>
+            <div class="border-capsule">
+              🧩 支持 GDK 版本
+            </div>
           </p>
           <div class="hero-actions">
-            <RouterLink class="btn-gradient" style="color: var(--text-primary)" to="/download/bedrockboot">立即下载</RouterLink>
-            <a class="btn-outline" style="color: var(--text-primary)" href="https://github.com/Round-Studio/BedrockBoot">前往 Github</a>
+            <RouterLink class="hero-btn hero-btn-solid" to="/download/bedrockboot">立即下载</RouterLink>
+            <a class="hero-btn hero-btn-ghost" href="https://github.com/Round-Studio/BedrockBoot" target="_blank">前往 GitHub</a>
           </div>
         </div>
       </div>
     </section>
 
-    <MarqueeSection
-        :text-list="['BedorckBoot', 'Minecraft']"
-    />
+    <MarqueeSection :text-list="['BedrockBoot', 'Minecraft Bedrock', 'Windows']" />
 
-    <DocsAlert type="danger" style="margin-top: 30px;">
-      当前 BedrockBoot 处于测试阶段，尚不稳定
+    <DocsAlert type="success" style="margin-top: 30px;">
+      BedrockBoot v2.x 已采用 OnePointUI，并在 v2 版本中引入了对 GDK 版本的支持。
     </DocsAlert>
 
-    <!-- system Section -->
-    <section class="system" id="system">
+    <section class="section" id="features">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title gradient-text-secondary">华丽 UI</h2>
-          <p class="section-subtitle">使用 <label class="gradient-text-secondary">OnePointUI</label> 框架。使得 BedrockBoot 拥有华丽的外表。</p>
+          <h2 class="section-title gradient-text-secondary">核心特性</h2>
+          <p class="section-subtitle">对齐仓库 README 的能力描述，聚焦 v2 版本体验。</p>
         </div>
 
+        <div class="feature-grid">
+          <article v-for="item in features" :key="item.title" class="feature-card">
+            <h3 class="feature-title">{{ item.title }}</h3>
+            <p class="feature-desc">{{ item.description }}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-ecosystem" id="ecosystem">
+      <div class="container">
         <div class="section-header">
-          <h2 class="section-title gradient-text-secondary">高速下载</h2>
-          <p class="section-subtitle">多任务，多线程下载，一次安装多版本无需顾虑</p>
+          <h2 class="section-title gradient-text-secondary">生态与入口</h2>
+          <p class="section-subtitle">下载、文档、反馈与社区入口统一整理。</p>
         </div>
 
+        <div class="link-grid">
+          <a v-for="item in links" :key="item.title" :href="item.href" target="_blank" class="link-card">
+            <h3 class="feature-title">{{ item.title }}</h3>
+            <p class="feature-desc">{{ item.description }}</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="credits">
+      <div class="container">
         <div class="section-header">
-          <h2 class="section-title gradient-text-secondary">高效率管理资源</h2>
-          <p class="section-subtitle">一个页面，搞定全部的存档，资源包管理</p>
-          <p class="section-subtitle">甚至还能管理实例的 Mods</p>
+          <h2 class="section-title gradient-text-secondary">项目信息</h2>
+          <p class="section-subtitle">来自仓库说明的维护与技术栈信息。</p>
         </div>
 
-        <div class="section-header">
-          <h2 class="section-title gradient-text-secondary">多版本 多实例 高度自定义</h2>
-          <p class="section-subtitle">自定义版本实例名称，启动画面</p>
-          <p class="section-subtitle">甚至还能多实例同时启动！</p>
-        </div>
-
-        <div class="section-header">
-          <h2 class="section-title gradient-text-secondary">高效率团队</h2>
-          <p class="section-subtitle">效率极高的维护团队，提出问题后快速得以解决</p>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3 class="feature-title">维护与交流</h3>
+            <p class="feature-desc">主要开发者：Dime、YoumiHa。</p>
+            <p class="feature-desc">GitHub Discussions 可用于功能建议与讨论。</p>
+            <p class="feature-desc">QQ 社区群：245839607。</p>
+          </article>
+          <article class="feature-card">
+            <h3 class="feature-title">开源基础</h3>
+            <p class="feature-desc">Avalonia、OnePointUI.Avalonia、BedrockLauncher.Core。</p>
+            <p class="feature-desc">项目许可证：GPL-3.0。</p>
+          </article>
         </div>
       </div>
     </section>
@@ -74,6 +97,48 @@
 <script setup>
 import MarqueeSection from '../components/MarqueeSection.vue'
 import DocsAlert from '../components/DocsAlert.vue'
+
+const features = [
+  {
+    title: 'OnePointUI 驱动的 v2 界面',
+    description: 'BedrockBoot v2.x 采用 OnePointUI 构建，强调现代化视觉与更统一的交互体验。'
+  },
+  {
+    title: '多版本与多实例并存',
+    description: '支持一次管理多个版本、多个实例，满足不同存档和服务器切换场景。'
+  },
+  {
+    title: '引入 GDK 版本支持',
+    description: '在 v2 版本中加入对 GDK 版本的支持，增强可用范围和兼容体验。'
+  },
+  {
+    title: '面向 Windows 平台',
+    description: '聚焦 Windows 平台的 Minecraft Bedrock 启动、管理与版本组织能力。'
+  }
+]
+
+const links = [
+  {
+    title: '产品下载页',
+    description: '前往 Round Studio 官方下载入口获取 BedrockBoot 构建。',
+    href: 'https://roundstudio.top/bedrockboot'
+  },
+  {
+    title: 'GitHub Releases',
+    description: '查看历史版本与最新发布说明。',
+    href: 'https://github.com/Round-Studio/BedrockBoot/releases'
+  },
+  {
+    title: '产品文档',
+    description: '查看 BedrockBoot 介绍与使用文档。',
+    href: 'https://docs.roundstudio.top/docs/%E6%96%87%E6%A1%A3/%E4%BA%A7%E5%93%81%E6%96%87%E6%A1%A3/BedrockBoot/AboutBedrockBoot'
+  },
+  {
+    title: 'GitHub Discussions',
+    description: '参与功能建议、问题讨论和社区交流。',
+    href: 'https://github.com/Round-Studio/BedrockBoot/discussions'
+  }
+]
 </script>
 
 <style scoped>
@@ -85,9 +150,27 @@ import DocsAlert from '../components/DocsAlert.vue'
   min-height: 90vh;
   display: flex;
   align-items: center;
-  color: white;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(44rem 26rem at 18% 18%, rgba(140, 140, 140, 0.2) 0%, rgba(140, 140, 140, 0) 72%),
+    radial-gradient(36rem 22rem at 86% 24%, rgba(96, 96, 96, 0.15) 0%, rgba(96, 96, 96, 0) 74%),
+    linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 70%);
+}
+
+.dark .hero::before {
+  background:
+    radial-gradient(44rem 26rem at 18% 18%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 72%),
+    radial-gradient(36rem 22rem at 86% 24%, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 74%),
+    linear-gradient(180deg, #171717 0%, var(--bg-primary) 72%);
 }
 
 .hero-container {
@@ -119,14 +202,32 @@ import DocsAlert from '../components/DocsAlert.vue'
   gap: 16px;
 }
 
-.hero-visual {
-  position: relative;
-  height: 400px;
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--border-color);
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(180deg); }
+.hero-btn-solid {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
+}
+
+.hero-btn-ghost {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.hero-btn:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-secondary);
 }
 
 .container {
@@ -134,9 +235,13 @@ import DocsAlert from '../components/DocsAlert.vue'
   padding: 0 40px;
 }
 
+.section {
+  padding: 56px 0 86px;
+}
+
 .section-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .section-title {
@@ -148,64 +253,56 @@ import DocsAlert from '../components/DocsAlert.vue'
 .section-subtitle {
   font-size: 1.125rem;
   color: var(--text-secondary);
-  max-width: 600px;
+  max-width: 640px;
   margin: 0 auto;
 }
 
-.system {
-  padding: 50px 0 100px 0;
+.section-ecosystem {
+  background: color-mix(in srgb, var(--bg-secondary) 55%, transparent);
 }
 
-.system-grid {
+.feature-grid,
+.link-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 18px;
 }
 
-.service-card {
-  padding: 40px;
-  border-radius: 20px;
-  background: var(--bg-primary);
-  /* border: 1px solid var(--border-color); */
-  transition: all 0.3s ease;
-  text-align: center;
+.feature-card,
+.link-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.service-card:hover {
-  transform: translateY(-8px);
-  /* box-shadow: var(--shadow-xl); */
+.link-card {
+  text-decoration: none;
+  display: block;
 }
 
-.service-card h3 {
-  font-size: 2rem;
-  font-weight: 600;
-  word-wrap: break-word;
+.feature-card:hover,
+.link-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--text-secondary);
+}
+
+.feature-title {
+  font-size: 1.15rem;
+  font-weight: 700;
   color: var(--text-primary);
-}
-
-.service-card a {
-  margin-right: 8px;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 6px;
-}
-
-.service-card.card-gradient h3 {
-  color: white;
-}
-
-.service-card p {
-  color: var(--text-secondary);
   margin-bottom: 10px;
-  line-height: 1.6;
-  height: 48px;
 }
 
-.service-card.card-gradient p {
-  color: rgba(255, 255, 255, 0.9);
+.feature-desc {
+  font-size: 0.97rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
 }
-
-
 
 @media (max-width: 1024px) {
   .hero-container {
@@ -220,7 +317,7 @@ import DocsAlert from '../components/DocsAlert.vue'
 }
 
 @media (max-width: 768px) {
-  .home {
+  .bb {
     padding-top: 60px;
   }
 
@@ -239,15 +336,6 @@ import DocsAlert from '../components/DocsAlert.vue'
 
   .section-title {
     font-size: 2rem;
-  }
-
-  .join-title {
-    font-size: 2rem;
-  }
-
-  .join-actions {
-    flex-direction: column;
-    align-items: center;
   }
 
   .container,

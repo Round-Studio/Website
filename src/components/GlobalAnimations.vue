@@ -8,39 +8,28 @@
       <div class="gradient-background"></div>
       <!-- 几何图形背景 -->
       <div class="geometric-shapes">
-        <div v-for="i in 100" :key="i" class="geometric-shape" :style="getShapeStyle(i)"></div>
+        <div v-for="i in 24" :key="i" class="geometric-shape" :style="getShapeStyle(i)"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGlobalAnimations } from '../composables/useGlobalAnimations'
 
 const router = useRouter()
 const { reinitAnimations } = useGlobalAnimations()
 
-// 响应式数据
-const loadingProgress = ref(0)
-const loadingText = ref('Round Studio')
-const isPageTransitioning = ref(false)
-const soundEnabled = ref(true)
-const showPerformanceMonitor = ref(false)
-const fps = ref(60)
-const memoryUsage = ref(0)
-
 // 几何图形样式生成
 const getShapeStyle = (index) => {
-  const shapes = ['circle', 'triangle', 'square', 'hexagon']
-  const shape = shapes[index % shapes.length]
-  const size = 20 + Math.random() * 40
+  const size = 12 + Math.random() * 20
   const left = Math.random() * 100
   const top = Math.random() * 100
-  const delay = Math.random() * 10
-  const duration = 20 + Math.random() * 20
-  const opacity = 0.02 + Math.random() * 0.05
+  const delay = Math.random() * 8
+  const duration = 28 + Math.random() * 20
+  const opacity = 0.01 + Math.random() * 0.02
 
   return {
     left: `${left}%`,
@@ -49,66 +38,18 @@ const getShapeStyle = (index) => {
     height: `${size}px`,
     animationDelay: `${delay}s`,
     animationDuration: `${duration}s`,
-    opacity: opacity,
-    '--shape': shape
+    opacity: opacity
   }
-}
-
-// 模拟加载进度
-const simulateLoading = () => {
-  const interval = setInterval(() => {
-    loadingProgress.value += Math.random() * 15
-    if (loadingProgress.value >= 100) {
-      loadingProgress.value = 100
-      clearInterval(interval)
-    }
-  }, 1)
-}
-
-
-// 性能监控
-const startPerformanceMonitoring = () => {
-  let lastTime = performance.now()
-  let frameCount = 0
-
-  const updatePerformance = () => {
-    frameCount++
-    const currentTime = performance.now()
-    
-    if (currentTime - lastTime >= 1000) {
-      fps.value = Math.round((frameCount * 1000) / (currentTime - lastTime))
-      frameCount = 0
-      lastTime = currentTime
-      
-      // 内存使用情况（如果支持）
-      if (performance.memory) {
-        memoryUsage.value = Math.round(performance.memory.usedJSHeapSize / 1024 / 1024)
-      }
-    }
-    
-    requestAnimationFrame(updatePerformance)
-  }
-  
-  updatePerformance()
 }
 
 router.afterEach(() => {
   setTimeout(() => {
-    isPageTransitioning.value = false
     reinitAnimations()
   }, 0)
 })
 
-// 键盘快捷键
-const handleKeyPress = (e) => {
-  // Ctrl + Shift + P: 切换性能监控
-  if (e.ctrlKey && e.shiftKey && e.key === 'P') {
-    showPerformanceMonitor.value = !showPerformanceMonitor.value
-  }
-}
-
 onUnmounted(() => {
-  document.removeEventListener('keydown', handleKeyPress)
+  // No-op: keep lifecycle hook for future cleanup extensions.
 })
 </script>
 
@@ -128,20 +69,22 @@ onUnmounted(() => {
 
 .geometric-shape {
   position: absolute;
-  background: var(--primary-blue);
-  animation: geometricFloat 30s infinite linear;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  animation: geometricFloat 42s infinite ease-in-out;
 }
 
 .geometric-shape:nth-child(odd) {
-  background: var(--primary-purple);
+  background: rgba(180, 180, 180, 0.05);
 }
 
 @keyframes geometricFloat {
   0% {
-    transform: translateY(100vh) rotate(0deg);
+    transform: translateY(100vh);
   }
   100% {
-    transform: translateY(-100px) rotate(360deg);
+    transform: translateY(-120px);
   }
 }
 
@@ -184,10 +127,10 @@ onUnmounted(() => {
 .transition-spinner {
   width: 40px;
   height: 40px;
-  border: 2px solid rgba(59, 130, 246, 0.1);
-  border-top: 2px solid var(--primary-blue);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-top: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  animation: spin 1s linear infinite;
   margin: 0 auto;
 }
 
@@ -225,7 +168,7 @@ onUnmounted(() => {
 }
 
 .sound-btn:hover {
-  transform: scale(1.1);
+  transform: scale(1.03);
   box-shadow: var(--shadow-lg);
 }
 
